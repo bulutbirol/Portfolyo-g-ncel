@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-export const AuroraBackground = ({ children, className = "", strength = 120 }) => {
+export function AuroraBackground({ children, className = "", strength = 120 }) {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 1400], [0, strength]);
 
@@ -34,4 +34,4 @@ export const AuroraBackground = ({ children, className = "", strength = 120 }) =
       <div className="relative z-10 text-white">{children}</div>
     </div>
   );
-};
+}
