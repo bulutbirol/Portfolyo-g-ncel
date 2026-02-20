@@ -17,38 +17,39 @@ export function Navbar() {
             <div className="mx-auto max-w-6xl px-10">
                 <div className="mt-5 flex items-center justify-between rounded-2xl bg-black/30 px-6 py-4 backdrop-blur-md ring-1 ring-white/10">
                     <a href="#home" className="flex items-center gap-3 group">
-                        <div className="text-white text-xl font-bold tracking-widest">&lt;/&gt;</div>
-
-                        <div className="relative rounded-xl px-3 py-1">
-                            <span
-                                className="
-        pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300
-        [background:conic-gradient(from_0deg,rgba(255,255,255,0.95),rgba(190,190,190,0.7),rgba(147,197,253,0.75),rgba(160,160,160,0.7),rgba(255,255,255,0.95))]
-        animate-[spin_5s_linear_infinite]
-        p-[1.5px]
-        [-webkit-mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)]
-        [-webkit-mask-composite:xor]
-        [mask-composite:exclude]
-      "
-                            />
-
-                            <span
-                                className="
-        pointer-events-none absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition duration-300
-        [background:conic-gradient(from_0deg,rgba(255,255,255,0.85),rgba(190,190,190,0.6),rgba(147,197,253,0.7),rgba(160,160,160,0.6),rgba(255,255,255,0.85))]
-        animate-[spin_5s_linear_infinite]
-        blur-[10px]
-      "
-                            />
-
-                            <span className="relative text-white/60 group-hover:text-white transition duration-300">
-                                birolweb.dev
-                            </span>
+                        <div className="text-white text-xl font-bold tracking-widest">
+                            &lt;/&gt;
                         </div>
+
+                        <div className="relative rounded-2xl">
+                            <div
+                                className="
+      pointer-events-none absolute inset-0 rounded-2xl
+      opacity-0 group-hover:opacity-100 transition duration-300
+      p-[1.5px]
+      bg-gradient-to-r from-white/90 via-gray-400/70 via-blue-300/70 via-gray-500/70 to-white/90
+      [-webkit-mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)]
+      [-webkit-mask-composite:xor]
+      [mask-composite:exclude]
+    "
+                            />
+
+                            <div
+                                className="
+      pointer-events-none absolute inset-0 rounded-2xl
+      opacity-0 group-hover:opacity-100 transition duration-300
+      shadow-[0_0_22px_rgba(147,197,253,0.45)]
+    "
+                            />
+
+                            <div className="relative px-4 py-1.5 rounded-2xl">
+                                <span className="text-white/60 group-hover:text-white transition duration-300">
+                                    birolweb.dev
+                                </span>
+                            </div>
+                        </div>
+
                     </a>
-
-
-
                     <nav className="hidden md:flex items-center gap-8 text-white/60 font-medium">
                         <a href="#home" className="hover:text-white transition-colors">Home</a>
                         <a href="#about" className="hover:text-white transition-colors">About</a>
@@ -59,7 +60,7 @@ export function Navbar() {
 
                     <button
                         type="button"
-                        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-xl ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
+                        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-2xl ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
                         aria-label="Open menu"
                         aria-expanded={open}
                         onClick={() => setOpen((v) => !v)}
