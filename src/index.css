@@ -2,16 +2,156 @@
 @tailwind components;
 @tailwind utilities;
 
-:root{
-  --white: rgba(255,255,255,1);
-  --black: rgba(0,0,0,1);
-  --transparent: rgba(255,255,255,0);
+:root {
+  --white: rgba(255, 255, 255, 1);
+  --black: rgba(0, 0, 0, 1);
+  --transparent: rgba(255, 255, 255, 0);
 
-  --blue-500: rgba(59,130,246,1);
-  --indigo-300: rgba(165,180,252,1);
-  --blue-300: rgba(147,197,253,1);
-  --violet-200: rgba(221,214,254,1);
-  --blue-400: rgba(96,165,250,1);
+  --blue-500: rgba(59, 130, 246, 1);
+  --indigo-300: rgba(165, 180, 252, 1);
+  --blue-300: rgba(147, 197, 253, 1);
+  --violet-200: rgba(221, 214, 254, 1);
+  --blue-400: rgba(96, 165, 250, 1);
 }
 
-html, body, #root { height: 100%; }
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.techStackTextArea {
+  padding-right: 0;
+}
+
+.orbitPeekWrapper {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orbitPeekWrapper .aboutOrbitRing {
+  position: absolute;
+  top: 50%;
+  right: -70px;
+  width: var(--size);
+  height: var(--size);
+  transform: translateY(-50%) rotate(0deg);
+  border-radius: 999px;
+  border: var(--stroke, 1px) solid rgba(255, 255, 255, .16);
+  background: none;
+  will-change: transform;
+  animation: orbitPeekSpin var(--duration) linear infinite;
+}
+
+.orbitPeekWrapper .aboutOrbitRing.reverse {
+  animation-direction: reverse;
+}
+
+.orbitPeekWrapper .aboutOrbitSlot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--angle)) translateX(calc(var(--size) / 2));
+}
+
+.orbitPeekWrapper .aboutOrbitItem {
+  width: var(--item, 40px);
+  height: var(--item, 40px);
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, .18);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .28), 0 0 0 1px rgba(255, 255, 255, .10) inset;
+  display: grid;
+  place-items: center;
+  pointer-events: auto;
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.orbitPeekWrapper .aboutOrbitItem:hover {
+  transform: translate(-50%, -50%) scale(1.10);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .40), 0 0 0 1px rgba(255, 255, 255, .16) inset;
+}
+
+.orbitPeekWrapper .aboutOrbitItem img {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  user-select: none;
+}
+
+@keyframes orbitPeekSpin {
+  from {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  to {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+@media (min-width: 768px) {
+  .techStackTextArea {
+    padding-right: 320px;
+  }
+
+  .orbitPeekWrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 330px;
+    height: 230px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 767px) {
+  .orbitPeekWrapper {
+    height: 210px;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  .orbitPeekWrapper {
+    height: 250px;
+    margin-top: 12px;
+  }
+
+  .orbitPeekWrapper .aboutOrbitRing {
+    top: auto;
+    right: 50%;
+    bottom: -130px;
+    transform: translateX(50%) rotate(0deg);
+    animation-name: orbitPeekSpinMobile;
+  }
+
+  @keyframes orbitPeekSpinMobile {
+    from {
+      transform: translateX(50%) rotate(0deg);
+    }
+
+    to {
+      transform: translateX(50%) rotate(360deg);
+    }
+  }
+
+  .heroTitle {
+    font-size: clamp(30px, 9vw, 46px);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .heroTitleStrong {
+    font-size: clamp(38px, 12vw, 56px);
+    line-height: 1.02;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+}
