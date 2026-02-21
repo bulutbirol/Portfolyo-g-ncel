@@ -40,7 +40,7 @@ body,
   height: var(--size);
   transform: translateY(-50%) rotate(0deg);
   border-radius: 999px;
-  border: var(--stroke, 1px) solid rgba(255, 255, 255, .16);
+  border: var(--stroke, 1px) solid rgba(255, 255, 255, 0.16);
   background: none;
   will-change: transform;
   animation: orbitPeekSpin var(--duration) linear infinite;
@@ -62,20 +62,20 @@ body,
 .orbitPeekWrapper .aboutOrbitItem {
   width: var(--item, 40px);
   height: var(--item, 40px);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%)rotate(180deg);
   border-radius: 12px;
-  background: rgba(0, 0, 0, .18);
+  background: rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(10px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .28), 0 0 0 1px rgba(255, 255, 255, .10) inset;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
   display: grid;
   place-items: center;
   pointer-events: auto;
-  transition: transform .18s ease, box-shadow .18s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 .orbitPeekWrapper .aboutOrbitItem:hover {
-  transform: translate(-50%, -50%) scale(1.10);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, .40), 0 0 0 1px rgba(255, 255, 255, .16) inset;
+  transform: translate(-50%, -50%) scale(1.10) rotate(180deg);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.16) inset;
 }
 
 .orbitPeekWrapper .aboutOrbitItem img {
@@ -107,13 +107,6 @@ body,
     width: 330px;
     height: 230px;
     overflow: hidden;
-  }
-}
-
-@media (max-width: 767px) {
-  .orbitPeekWrapper {
-    height: 210px;
-    margin-top: 12px;
   }
 }
 
@@ -154,4 +147,79 @@ body,
     overflow-wrap: anywhere;
     word-break: break-word;
   }
+}
+
+.typewriterWrap {
+  display: inline;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.typewriterText {
+  display: inline;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  white-space: normal;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+.typewriterCaret {
+  display: inline;
+}
+
+.heroTitleStrong {
+  font-size: clamp(44px, 13vw, 72px);
+  line-height: 1.02;
+}
+
+.heroTitleBase {
+  font-size: clamp(28px, 4.2vw, 56px);
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.heroTypeLine {
+  font-size: clamp(30px, 4.2vw, 44px);
+  line-height: 1.15;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+@media (max-width: 767px) {
+  .heroTitleBase {
+    font-size: clamp(30px, 9vw, 46px);
+    line-height: 1.08;
+  }
+
+  .heroTypeLine {
+    font-size: clamp(26px, 8.5vw, 38px);
+    line-height: 1.12;
+  }
+}
+
+.auroraDyn {
+  --white: rgba(255, 255, 255, 0.8);
+  --transparent: rgba(255, 255, 255, 0);
+  --blue-500: rgba(59, 130, 246, 0.85);
+  --indigo-300: rgba(129, 140, 248, 0.75);
+  --blue-300: rgba(147, 197, 253, 0.75);
+  --violet-200: rgba(221, 214, 254, 0.7);
+  --blue-400: rgba(96, 165, 250, 0.8);
+  background-position: calc(50% + var(--auroraX, 0%)) calc(50% + var(--auroraY, 0%)),
+    calc(50% - var(--auroraX, 0%)) calc(50% - var(--auroraY, 0%));
+}
+
+.auroraDyn::after {
+  animation-duration: var(--auroraDur, 14s);
+  animation-direction: var(--auroraDir, normal);
 }

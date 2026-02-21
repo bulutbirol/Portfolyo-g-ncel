@@ -1,11 +1,11 @@
 import React from "react";
 import { AuroraBackground } from "./components/background/AuroraBackground";
 import { Navbar } from "./components/layout/Navbar";
-import { Hero } from "./components/hero/Hero";
+import Hero from "./components/hero/Hero";
 import { About } from "./sections/About";
 import { Projects } from "./sections/Projects";
 import { Work } from "./sections/Work";
-import { Contact } from "./sections/Contact";
+import Contact from "./sections/Contact";
 
 export default function App() {
   return (
