@@ -3,10 +3,11 @@ import { AuroraBackground } from "./components/background/AuroraBackground";
 import { Navbar } from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
 import { About } from "./sections/About";
-import { Projects } from "./sections/Projects";
+import Projects from "./sections/Projects";
 import { Work } from "./sections/Work";
 import Contact from "./sections/Contact";
 import { ToastContainer } from "react-toastify";
+import Footer from "./sections/Footer";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
@@ -22,6 +23,7 @@ export default function App() {
             <Projects />
             <Work />
             <Contact />
+            <Footer />
           </main>
         </div>
       </AuroraBackground>
