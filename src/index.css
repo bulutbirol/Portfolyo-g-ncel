@@ -223,3 +223,30 @@ body,
   animation-duration: var(--auroraDur, 14s);
   animation-direction: var(--auroraDir, normal);
 }
+.auroraMax {
+  filter: blur(16px) contrast(1.22) saturate(1.6);
+}
+
+.auroraStaticBg {
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.28), transparent 55%),
+    radial-gradient(circle at 70% 30%, rgba(167, 139, 250, 0.22), transparent 60%),
+    radial-gradient(circle at 40% 70%, rgba(34, 211, 238, 0.18), transparent 65%),
+    linear-gradient(115deg, rgba(59, 130, 246, 0.16), rgba(167, 139, 250, 0.12), rgba(34, 211, 238, 0.1));
+  background-size: 220% 220%;
+  background-position: 50% 40%;
+  filter: blur(10px) saturate(1.2);
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-mask-image: radial-gradient(ellipse at 100% 0%, black 12%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 100% 0%, black 12%, transparent 72%);
+}
+.workCard {
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.workCard:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.18);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+}

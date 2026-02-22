@@ -6,20 +6,25 @@ import { About } from "./sections/About";
 import { Projects } from "./sections/Projects";
 import { Work } from "./sections/Work";
 import Contact from "./sections/Contact";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
-    <AuroraBackground strength={140}>
-      <div className="min-h-screen">
-        <Navbar />
-        <main className="mx-auto max-w-6xl px-10 pt-32 md:pt-36">
-          <Hero />
-          <About />
-          <Projects />
-          <Work />
-          <Contact />
-        </main>
-      </div>
-    </AuroraBackground>
+    <>
+      <ToastContainer position="bottom-right" newestOnTop />
+      <AuroraBackground strength={140}>
+        <div className="min-h-screen">
+          <Navbar />
+          <main className="mx-auto max-w-6xl px-10 pt-32 md:pt-36">
+            <Hero />
+            <About />
+            <Projects />
+            <Work />
+            <Contact />
+          </main>
+        </div>
+      </AuroraBackground>
+    </>
   );
 }

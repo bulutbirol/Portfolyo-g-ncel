@@ -83,7 +83,7 @@ const inner = STACK.slice(7);
 export function About() {
   return (
     <section id="about" className="py-24">
-      <h2 className="text-white text-4xl md:text-5xl font-semibold mb-10">About</h2>
+      <h2 className="text-white text-4xl md:text-5xl font-semibold mb-10">About Me</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-5 space-y-6">
