@@ -11,6 +11,7 @@ export default function Contact() {
   });
 
   const [errors, setErrors] = useState({});
+  const [isSending, setIsSending] = useState(false);
 
   const onChange = (e) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -20,6 +21,10 @@ export default function Contact() {
   const validate = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!form.fullName.trim()) {
+      newErrors.fullName = "Please enter your name.";
+    }
 
     if (!emailRegex.test(form.email)) {
       newErrors.email = "Please enter a valid email address.";
@@ -32,8 +37,10 @@ export default function Contact() {
     return newErrors;
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+
+    if (isSending) return;
 
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
@@ -46,21 +53,53 @@ export default function Contact() {
       return;
     }
 
-    toast.success("Message sent successfully!", {
-      position: "top-right",
-      theme: "dark",
-      autoClose: 2500,
-    });
+    setIsSending(true);
 
-    setForm({ fullName: "", email: "", message: "" });
-    setErrors({});
+    try {
+      const res = await fetch("/api/contact.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      let data = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
+
+      if (!res.ok || !data?.ok) {
+        const msg = data?.error ? String(data.error) : "Message could not be sent.";
+        toast.error(msg, {
+          position: "top-right",
+          theme: "dark",
+          autoClose: 3000,
+        });
+        return;
+      }
+
+      toast.success("Message sent successfully!", {
+        position: "top-right",
+        theme: "dark",
+        autoClose: 2500,
+      });
+
+      setForm({ fullName: "", email: "", message: "" });
+      setErrors({});
+    } catch {
+      toast.error("Server error. Please try again.", {
+        position: "top-right",
+        theme: "dark",
+        autoClose: 3000,
+      });
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
-    <section
-      id="contact"
-      className="relative overflow-visible w-full py-24"
-    >
+    <section id="contact" className="relative overflow-visible w-full py-24">
       <div className="absolute left-1/2 -translate-x-1/2 top-0 w-screen h-full pointer-events-none">
         <SnowDotsBackground
           count={120}
@@ -83,9 +122,7 @@ export default function Contact() {
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] p-8 md:p-10">
             <form onSubmit={onSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm text-white/70 mb-2">
-                  Full Name
-                </label>
+                <label className="block text-sm text-white/70 mb-2">Full Name</label>
                 <input
                   type="text"
                   name="fullName"
@@ -93,14 +130,17 @@ export default function Contact() {
                   onChange={onChange}
                   placeholder="Birol Bulut"
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70"
+                  className={`w-full rounded-xl border ${
+                    errors.fullName ? "border-red-500/70" : "border-white/10"
+                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
+                {errors.fullName && (
+                  <p className="mt-2 text-xs text-red-400">{errors.fullName}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-2">
-                  Email
-                </label>
+                <label className="block text-sm text-white/70 mb-2">Email</label>
                 <input
                   type="email"
                   name="email"
@@ -108,8 +148,9 @@ export default function Contact() {
                   onChange={onChange}
                   placeholder="birolblood@gmail.com"
                   required
-                  className={`w-full rounded-xl border ${errors.email ? "border-red-500/70" : "border-white/10"
-                    } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
+                  className={`w-full rounded-xl border ${
+                    errors.email ? "border-red-500/70" : "border-white/10"
+                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
                 {errors.email && (
                   <p className="mt-2 text-xs text-red-400">{errors.email}</p>
@@ -117,9 +158,7 @@ export default function Contact() {
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-2">
-                  Message
-                </label>
+                <label className="block text-sm text-white/70 mb-2">Message</label>
                 <textarea
                   name="message"
                   value={form.message}
@@ -127,8 +166,9 @@ export default function Contact() {
                   rows={4}
                   placeholder="Describe your project scope, goals, and timeline..."
                   required
-                  className={`w-full resize-y min-h-[110px] max-h-[260px] rounded-xl border ${errors.message ? "border-red-500/70" : "border-white/10"
-                    } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
+                  className={`w-full resize-y min-h-[110px] max-h-[260px] rounded-xl border ${
+                    errors.message ? "border-red-500/70" : "border-white/10"
+                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
                 {errors.message && (
                   <p className="mt-2 text-xs text-red-400">{errors.message}</p>
@@ -137,18 +177,20 @@ export default function Contact() {
 
               <button
                 type="submit"
-                className="group relative w-full overflow-hidden rounded-xl 
+                disabled={isSending}
+                className={`group relative w-full overflow-hidden rounded-xl 
                            bg-white/5 backdrop-blur-xl 
                            px-4 py-3.5 font-medium text-white/85 
                            transition-all duration-300
                            hover:bg-white/10 
                            border border-transparent hover:border-white/20
                            shadow-[0_14px_40px_rgba(0,0,0,0.35)]
-                           active:scale-[0.99]"
+                           active:scale-[0.99]
+                           ${isSending ? "opacity-60 cursor-not-allowed" : ""}`}
               >
                 <span className="relative z-10 flex items-center justify-center">
                   <span className="transition-all duration-300 group-hover:opacity-0">
-                    Send
+                    {isSending ? "Sending..." : "Send"}
                   </span>
 
                   <svg
