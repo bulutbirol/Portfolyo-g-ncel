@@ -102,8 +102,8 @@ export function About() {
               </div>
 
               <a
-                href="/Birol-Bulut-Front-end.pdf"
-                download="Birol-Bulut-CV.pdf"
+                href="/cv.pdf"
+                download="cv.pdf"
                 className="inline-flex mt-7 items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-medium"
               >
                 Download CV <span aria-hidden>↓</span>
