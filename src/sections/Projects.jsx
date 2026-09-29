@@ -32,11 +32,11 @@ const projects = [
 
 function ProjectLinks({ title, live, source, prominent = false }) {
   const liveClass = prominent
-    ? "inline-flex items-center gap-2 rounded-xl bg-amber-200 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200"
-    : "inline-flex items-center gap-1.5 text-sm font-semibold text-amber-200 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200";
+    ? "liquidGlassInner inline-flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white transition hover:border-white/35 hover:bg-white/15 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sky-200"
+    : "inline-flex items-center gap-1.5 text-sm font-semibold text-sky-200 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sky-200";
   const sourceClass = prominent
-    ? "inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-semibold text-white/80 transition hover:border-white/45 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200"
-    : "inline-flex items-center gap-1.5 text-sm font-medium text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200";
+    ? "inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/[0.04] px-4 py-2.5 text-sm font-semibold text-white/80 backdrop-blur-lg transition hover:border-white/35 hover:bg-white/10 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sky-200"
+    : "inline-flex items-center gap-1.5 text-sm font-medium text-white/65 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-sky-200";
 
   return (
     <div className="flex flex-wrap items-center gap-3">
@@ -56,17 +56,16 @@ export default function Projects() {
   return (
     <section id="projects" className="relative scroll-mt-28 py-20 md:py-28">
       <div className="mb-10 max-w-3xl">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200/80">Selected work</p>
-        <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">Projects with a purpose.</h2>
-        <p className="mt-4 text-base leading-7 text-white/60">A closer look at the products and interfaces I have built, from full-stack workflows to focused frontend experiences.</p>
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-sky-200/75">Selected work</p>
+        <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">My Selected Projects</h2>
+        <p className="mt-4 text-base leading-7 text-white/65">A closer look at the products and interfaces I have built.</p>
       </div>
 
-      <article className="relative overflow-hidden rounded-[2rem] border border-amber-200/20 bg-[#10141b]/90 shadow-[0_32px_100px_rgba(0,0,0,0.35)]">
-        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-32 h-80 w-80 rounded-full bg-amber-300/10 blur-[100px]" />
+      <article className="liquidGlass rounded-[2rem]">
         <div className="relative grid gap-10 p-6 sm:p-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
           <div className="flex flex-col items-start">
-            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/[0.07] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-amber-200" /> Featured full-stack project
+            <div className="liquidGlassInner mb-7 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">
+              <span className="h-1.5 w-1.5 rounded-full bg-sky-200" /> Featured full-stack project
             </div>
             <h3 className="text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">ServiceFlow</h3>
             <p className="mt-5 max-w-xl text-base leading-8 text-white/65">
@@ -74,7 +73,7 @@ export default function Projects() {
             </p>
             <div className="mt-7 flex flex-wrap gap-2">
               {["React", "Spring Boot", "PostgreSQL", "Flyway", "JWT"].map((item) => (
-                <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">{item}</span>
+                <span key={item} className="rounded-full border border-white/15 bg-white/[0.06] px-3 py-1.5 text-xs font-medium text-white/75 backdrop-blur-md">{item}</span>
               ))}
             </div>
             <div className="mt-9">
@@ -82,18 +81,18 @@ export default function Projects() {
             </div>
           </div>
 
-          <div aria-hidden="true" className="self-center rounded-[1.5rem] border border-white/10 bg-[#0a0d13] p-4 shadow-2xl sm:p-6">
+          <div aria-hidden="true" className="liquidGlassInner self-center rounded-[1.5rem] p-4 sm:p-6">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <span className="text-xs font-semibold tracking-[0.18em] text-white/45">SERVICEFLOW / WORKFLOW</span>
-              <span className="flex items-center gap-2 text-xs text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> Live</span>
+              <span className="flex items-center gap-2 text-xs text-sky-200"><span className="h-1.5 w-1.5 rounded-full bg-sky-200" /> Live</span>
             </div>
             <p className="mt-7 max-w-[18ch] text-2xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-3xl">Every request has a next step.</p>
             <div className="mt-8 space-y-2.5">
               {["Customer request", "Quote & approval", "Technician schedule", "Completed work"].map((step, index) => (
-                <div key={step} className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.035] px-4 py-3">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-amber-200/10 text-xs font-bold text-amber-200">0{index + 1}</span>
+                <div key={step} className="flex items-center gap-3 rounded-xl border border-white/10 bg-white/[0.07] px-4 py-3 backdrop-blur-md">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-white/10 text-xs font-bold text-sky-100">0{index + 1}</span>
                   <span className="flex-1 text-sm font-medium text-white/80">{step}</span>
-                  {index < 3 ? <FiArrowRight className="text-white/30" /> : <span className="text-xs font-semibold text-emerald-300">DONE</span>}
+                  {index < 3 ? <FiArrowRight className="text-white/40" /> : <span className="text-xs font-semibold text-sky-200">DONE</span>}
                 </div>
               ))}
             </div>
@@ -106,10 +105,10 @@ export default function Projects() {
 
       <div className="mt-5 grid gap-5 md:grid-cols-2">
         {projects.map((project) => (
-          <article key={project.title} className="group flex flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.055] sm:p-8">
+          <article key={project.title} className="liquidGlass flex flex-col rounded-[1.5rem] p-6 transition hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] sm:p-8">
             <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">{project.title}</h3>
             <p className="mt-3 flex-1 text-sm leading-7 text-white/60">{project.description}</p>
-            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-amber-200/75">
+            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-sky-200/80">
               {project.stack.map((item) => <span key={item}>{item}</span>)}
             </div>
             <div className="mt-7 border-t border-white/10 pt-5">
