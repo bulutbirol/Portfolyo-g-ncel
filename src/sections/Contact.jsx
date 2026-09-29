@@ -99,7 +99,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative overflow-visible w-full py-24">
+    <section id="contact" className="relative w-full scroll-mt-28 overflow-visible py-24">
       <div className="absolute left-1/2 -translate-x-1/2 top-0 w-screen h-full pointer-events-none">
         <SnowDotsBackground
           count={120}

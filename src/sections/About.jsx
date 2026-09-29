@@ -82,7 +82,7 @@ const inner = STACK.slice(7);
 
 export function About() {
   return (
-    <section id="about" className="py-24">
+    <section id="about" className="scroll-mt-28 py-24">
       <h2 className="text-white text-4xl md:text-5xl font-semibold mb-10">About Me</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -91,19 +91,19 @@ export function About() {
             <div className="p-7">
               <div className="text-white/90 text-2xl font-semibold">Hi, I'm Birol Bulut</div>
               <p className="mt-3 text-white/60 leading-relaxed">
-                I build clean, maintainable web applications with a focus on performance, scalability, and real-world usability.
+                I build React interfaces and Java services that turn busy business processes into clear steps. I care about useful details, reliable data, and products people can actually use.
               </p>
 
               <div className="mt-6 flex flex-wrap gap-2">
-                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">Frontend</span>
-                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">Backend</span>
-                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">SEO</span>
-                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">Performance</span>
+                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">React</span>
+                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">Spring Boot</span>
+                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">PostgreSQL</span>
+                <span className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">Product thinking</span>
               </div>
 
               <a
                 href="/cv.pdf"
-                download="cv.pdf"
+                download="Birol-Bulut-CV.pdf"
                 className="inline-flex mt-7 items-center gap-2 px-4 py-2 rounded-xl bg-white text-black font-medium"
               >
                 Download CV <span aria-hidden>↓</span>
@@ -135,9 +135,9 @@ export function About() {
           </div>
 
           <div className="rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur-md p-7">
-            <div className="text-white/90 text-xl font-semibold">Time Zone</div>
-            <p className="mt-2 text-white/60">Always available for collaboration and quick iterations.</p>
-            <div className="mt-6 rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 text-white/70">Always-on: 24/7</div>
+            <div className="text-white/90 text-xl font-semibold">Location & collaboration</div>
+            <p className="mt-2 text-white/60">Based in Bursa, Türkiye. Open to remote projects and thoughtful collaboration.</p>
+            <div className="mt-6 rounded-2xl bg-white/5 ring-1 ring-white/10 p-4 text-white/70">Bursa · UTC+3</div>
           </div>
           <div className="relative rounded-3xl bg-white/5 ring-1 ring-white/10 backdrop-blur-md p-7 md:col-span-2 overflow-hidden">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
