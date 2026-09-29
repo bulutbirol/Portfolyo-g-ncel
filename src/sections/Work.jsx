@@ -15,15 +15,14 @@ export function Work() {
   const items = useMemo(
     () => [
       {
-        role: "Software Engineer Intern",
+        role: "Full Stack Intern",
         company: "Workintech",
-        url: "https://www.workintech.com.tr/",
-        period: "Sep 2025 — Present",
+        period: "Sep 2025 — Mar 2026",
         location: "Bursa, Türkiye · Remote",
         highlights: [
-          "Contributing to both front-end and back-end development in real-world projects.",
-          "Writing clean, maintainable, and scalable code following best practices.",
-          "Collaborating within an agile workflow and structured delivery cycles.",
+          "Contributed to both front-end and back-end development in real-world projects.",
+          "Wrote clean, maintainable, and scalable code following best practices.",
+          "Collaborated within an agile workflow and structured delivery cycles.",
         ],
         stack: [
           "React",
@@ -44,8 +43,7 @@ export function Work() {
       },
       {
         role: "Front-End Developer",
-        company: "bbroz.com",
-        url: "https://bbroz.com",
+        company: "BBROZ",
         period: "Feb 2022 — Present",
         location: "Bursa, Türkiye · In-site",
         highlights: [
@@ -107,14 +105,7 @@ export function Work() {
                         {it.role}
                       </div>
                       <div className="mt-1 text-white/70">
-                        <a
-                          href={it.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="font-medium text-white/80 hover:text-white transition-colors duration-200 underline underline-offset-4 decoration-white/30 hover:decoration-white"
-                        >
-                          {it.company}
-                        </a>
+                        <span className="font-medium text-white/80">{it.company}</span>
                         <span className="text-white/40"> · </span>
                         <span className="text-white/60">{it.location}</span>
                       </div>
