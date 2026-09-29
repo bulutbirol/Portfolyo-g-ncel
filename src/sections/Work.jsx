@@ -60,7 +60,7 @@ export function Work() {
   );
 
   return (
-    <section id="work" className="relative py-20 md:py-28">
+    <section id="work" className="relative scroll-mt-28 py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-10 md:mb-14">
           <h2 className="text-white text-3xl md:text-4xl font-semibold tracking-[-0.02em]">
