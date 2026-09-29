@@ -1,132 +1,122 @@
-import { useMemo, useRef, useState } from "react";
+import { FiArrowRight, FiArrowUpRight, FiGithub } from "react-icons/fi";
 
-export default function Projects() {
-  const projects = useMemo(
-    () => [
-      {
-        id: 1,
-        title: "Pizza Web App",
-        stack: ["React", "Redux", "Router", "Tailwind"],
-        href: "https://pizza-web-kappa.vercel.app/",
-      },
-      {
-        id: 2,
-        title: "Redux Movies App",
-        stack: ["React", "Redux", "Axios", "API"],
-        href: "https://fsweb-s10g2-redux-filmler-solutio.vercel.app",
-      },
-      {
-        id: 3,
-        title: "E-Commerce Platform",
-        stack: ["React", "NodeJs", "MongoDB"],
-        href: "https://e-commerce-birol.vercel.app/",
-      },
-      {
-        id: 4,
-        title: "Redux Watchlist App",
-        stack: ["React", "Redux", "State Management"],
-        href: "https://fsweb-s10g3-redux-watchlist-solutio-ashen-one.vercel.app/",
-      },
-    ],
-    []
-  );
+const projects = [
+  {
+    title: "Pizza Web App",
+    description: "A restaurant ordering interface built around a clear menu and cart flow.",
+    stack: ["React", "Redux", "Router", "Tailwind"],
+    live: "https://pizza-web-kappa.vercel.app/",
+    source: "https://github.com/bulutbirol/fsweb-s8-challenge-pizza",
+  },
+  {
+    title: "Redux Movies App",
+    description: "Browse movie data with a responsive React interface and predictable Redux state.",
+    stack: ["React", "Redux", "Axios"],
+    live: "https://fsweb-s10g2-redux-filmler-solutio.vercel.app",
+    source: "https://github.com/bulutbirol/fsweb-s10g2-redux-filmler-solution",
+  },
+  {
+    title: "E-Commerce Platform",
+    description: "A full-stack storefront connecting a product interface to a Node.js backend.",
+    stack: ["React", "Node.js", "MongoDB"],
+    live: "https://e-commerce-birol.vercel.app/",
+  },
+  {
+    title: "Redux Watchlist App",
+    description: "A focused watchlist experience for keeping track of films to revisit.",
+    stack: ["React", "Redux", "State management"],
+    live: "https://fsweb-s10g3-redux-watchlist-solutio-ashen-one.vercel.app/",
+    source: "https://github.com/bulutbirol/fsweb-s10g3-redux-watchlist-solution",
+  },
+];
 
-  const wrapRef = useRef(null);
-  const [hovered, setHovered] = useState(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
-
-  const onMove = (e) => {
-    if (!wrapRef.current) return;
-    const r = wrapRef.current.getBoundingClientRect();
-    setPos({ x: e.clientX - r.left, y: e.clientY - r.top });
-  };
-
-  const active = hovered ? projects.find((p) => p.id === hovered) : null;
-
-  const getScreenshotUrl = (url) => {
-    const encoded = encodeURIComponent(url);
-    return `https://s0.wp.com/mshots/v1/${encoded}?w=1200`;
-  };
+function ProjectLinks({ title, live, source, prominent = false }) {
+  const liveClass = prominent
+    ? "inline-flex items-center gap-2 rounded-xl bg-amber-200 px-4 py-2.5 text-sm font-semibold text-slate-950 transition hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200"
+    : "inline-flex items-center gap-1.5 text-sm font-semibold text-amber-200 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200";
+  const sourceClass = prominent
+    ? "inline-flex items-center gap-2 rounded-xl border border-white/20 px-4 py-2.5 text-sm font-semibold text-white/80 transition hover:border-white/45 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200"
+    : "inline-flex items-center gap-1.5 text-sm font-medium text-white/60 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-amber-200";
 
   return (
-    <section
-      id="projects"
-      ref={wrapRef}
-      onMouseMove={onMove}
-      className="relative w-full px-6 py-14"
-    >
-      <div className="mx-auto max-w-7xl">
-        <h2 className="text-4xl md:text-5xl font-semibold tracking-tight text-white">
-          My Selected Projects
-        </h2>
+    <div className="flex flex-wrap items-center gap-3">
+      <a href={live} target="_blank" rel="noopener noreferrer" aria-label={"Open " + title + " live demo"} className={liveClass}>
+        Live demo <FiArrowUpRight aria-hidden="true" />
+      </a>
+      {source && (
+        <a href={source} target="_blank" rel="noopener noreferrer" aria-label={"View " + title + " source on GitHub"} className={sourceClass}>
+          <FiGithub aria-hidden="true" /> Source code
+        </a>
+      )}
+    </div>
+  );
+}
 
-        <div className="mt-10 rounded-2xl border border-white/10 bg-white/[0.02] backdrop-blur-xl overflow-hidden">
-          {projects.map((p) => (
-            <a
-              key={p.id}
-              href={p.href}
-              target="_blank"
-              rel="noreferrer"
-              onMouseEnter={() => setHovered(p.id)}
-              onMouseLeave={() => setHovered(null)}
-              className="group block"
-            >
-              <div className="flex items-center justify-between gap-6 px-6 md:px-8 py-10 border-t border-white/10 first:border-t-0">
-                <div className="min-w-0">
-                  <div className="text-xl md:text-2xl font-medium text-white/95">
-                    {p.title}
-                  </div>
-
-                  <div className="mt-3 flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                    {p.stack.map((s) => (
-                      <span key={s} className="text-amber-400/80">
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex shrink-0 items-center gap-2 text-white/80 group-hover:text-white transition">
-                  <span className="text-sm">Live Site</span>
-                  <span className="text-lg translate-x-0 group-hover:translate-x-1 transition">
-                    →
-                  </span>
-                </div>
-              </div>
-            </a>
-          ))}
-        </div>
+export default function Projects() {
+  return (
+    <section id="projects" className="relative scroll-mt-28 py-20 md:py-28">
+      <div className="mb-10 max-w-3xl">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-amber-200/80">Selected work</p>
+        <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">Projects with a purpose.</h2>
+        <p className="mt-4 text-base leading-7 text-white/60">A closer look at the products and interfaces I have built, from full-stack workflows to focused frontend experiences.</p>
       </div>
 
-      <div
-        className={`pointer-events-none absolute z-20 hidden md:block transition-opacity duration-200 ${active ? "opacity-100" : "opacity-0"
-          }`}
-        style={{
-          left: pos.x + 30,
-          top: pos.y - 150,
-        }}
-      >
-        {active && (
-          <div className="w-[520px] rounded-2xl border border-white/15 bg-white/[0.05] backdrop-blur-2xl shadow-[0_18px_60px_rgba(0,0,0,0.55)] overflow-hidden">
-            <div className="relative aspect-[16/9]">
-              <img
-                src={getScreenshotUrl(active.href)}
-                alt={active.title}
-                className="w-full h-full object-cover"
-                loading="lazy"
-                decoding="async"
-                draggable={false}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+      <article className="relative overflow-hidden rounded-[2rem] border border-amber-200/20 bg-[#10141b]/90 shadow-[0_32px_100px_rgba(0,0,0,0.35)]">
+        <div aria-hidden="true" className="pointer-events-none absolute -right-24 -top-32 h-80 w-80 rounded-full bg-amber-300/10 blur-[100px]" />
+        <div className="relative grid gap-10 p-6 sm:p-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
+          <div className="flex flex-col items-start">
+            <div className="mb-7 inline-flex items-center gap-2 rounded-full border border-amber-200/20 bg-amber-200/[0.07] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-amber-200">
+              <span className="h-1.5 w-1.5 rounded-full bg-amber-200" /> Featured full-stack project
             </div>
-
-            <div className="px-4 py-3">
-              <div className="text-sm font-medium text-white/90 truncate">
-                {active.title}
-              </div>
+            <h3 className="text-4xl font-semibold tracking-[-0.05em] text-white sm:text-5xl">ServiceFlow</h3>
+            <p className="mt-5 max-w-xl text-base leading-8 text-white/65">
+              A field service platform that carries a customer request through quoting, scheduling, technician work, and completion. Built with separate role-based experiences for admins, technicians, and customers.
+            </p>
+            <div className="mt-7 flex flex-wrap gap-2">
+              {["React", "Spring Boot", "PostgreSQL", "Flyway", "JWT"].map((item) => (
+                <span key={item} className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs font-medium text-white/65">{item}</span>
+              ))}
+            </div>
+            <div className="mt-9">
+              <ProjectLinks title="ServiceFlow" live="https://serviceflow-web-ten.vercel.app/" source="https://github.com/bulutbirol/FSM-Platform-Project" prominent />
             </div>
           </div>
-        )}
+
+          <div aria-hidden="true" className="self-center rounded-[1.5rem] border border-white/10 bg-[#0a0d13] p-4 shadow-2xl sm:p-6">
+            <div className="flex items-center justify-between border-b border-white/10 pb-4">
+              <span className="text-xs font-semibold tracking-[0.18em] text-white/45">SERVICEFLOW / WORKFLOW</span>
+              <span className="flex items-center gap-2 text-xs text-emerald-300"><span className="h-1.5 w-1.5 rounded-full bg-emerald-300" /> Live</span>
+            </div>
+            <p className="mt-7 max-w-[18ch] text-2xl font-semibold leading-tight tracking-[-0.04em] text-white sm:text-3xl">Every request has a next step.</p>
+            <div className="mt-8 space-y-2.5">
+              {["Customer request", "Quote & approval", "Technician schedule", "Completed work"].map((step, index) => (
+                <div key={step} className="flex items-center gap-3 rounded-xl border border-white/[0.07] bg-white/[0.035] px-4 py-3">
+                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-amber-200/10 text-xs font-bold text-amber-200">0{index + 1}</span>
+                  <span className="flex-1 text-sm font-medium text-white/80">{step}</span>
+                  {index < 3 ? <FiArrowRight className="text-white/30" /> : <span className="text-xs font-semibold text-emerald-300">DONE</span>}
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 flex flex-wrap gap-2 text-[11px] font-medium uppercase tracking-[0.12em] text-white/40">
+              <span>Admin</span><span>·</span><span>Technician</span><span>·</span><span>Customer</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <div className="mt-5 grid gap-5 md:grid-cols-2">
+        {projects.map((project) => (
+          <article key={project.title} className="group flex flex-col rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 transition hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.055] sm:p-8">
+            <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">{project.title}</h3>
+            <p className="mt-3 flex-1 text-sm leading-7 text-white/60">{project.description}</p>
+            <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-amber-200/75">
+              {project.stack.map((item) => <span key={item}>{item}</span>)}
+            </div>
+            <div className="mt-7 border-t border-white/10 pt-5">
+              <ProjectLinks title={project.title} live={project.live} source={project.source} />
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   );
