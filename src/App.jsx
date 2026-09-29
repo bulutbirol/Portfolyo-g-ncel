@@ -8,11 +8,12 @@ import { Work } from "./sections/Work";
 import Contact from "./sections/Contact";
 import { ToastContainer } from "react-toastify";
 import Footer from "./sections/Footer";
+import { LanguageProvider } from "./LanguageProvider";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App() {
   return (
-    <>
+    <LanguageProvider>
       <ToastContainer position="bottom-right" newestOnTop />
       <AuroraBackground strength={140}>
         <div className="min-h-screen">
@@ -27,6 +28,6 @@ export default function App() {
           </main>
         </div>
       </AuroraBackground>
-    </>
+    </LanguageProvider>
   );
 }

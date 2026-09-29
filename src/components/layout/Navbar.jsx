@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "../../LanguageContext";
 
 export function Navbar() {
     const [open, setOpen] = useState(false);
+    const { language, setLanguage, copy } = useLanguage();
+    const text = copy.nav;
 
     useEffect(() => {
         const onResize = () => {
@@ -50,18 +53,32 @@ export function Navbar() {
                         </div>
 
                     </a>
-                    <nav className="hidden md:flex items-center gap-8 text-white/60 font-medium">
-                        <a href="#home" className="hover:text-white transition-colors">Home</a>
-                        <a href="#about" className="hover:text-white transition-colors">About</a>
-                        <a href="#projects" className="hover:text-white transition-colors">Projects</a>
-                        <a href="#work" className="hover:text-white transition-colors">Work</a>
-                        <a href="#contact" className="hover:text-white transition-colors">Contact</a>
-                    </nav>
-
-                    <button
+                    <div className="flex items-center gap-2 md:gap-5">
+                      <nav className="hidden md:flex items-center gap-5 text-white/60 font-medium lg:gap-8">
+                        <a href="#home" className="hover:text-white transition-colors">{text.home}</a>
+                        <a href="#about" className="hover:text-white transition-colors">{text.about}</a>
+                        <a href="#projects" className="hover:text-white transition-colors">{text.projects}</a>
+                        <a href="#work" className="hover:text-white transition-colors">{text.work}</a>
+                        <a href="#contact" className="hover:text-white transition-colors">{text.contact}</a>
+                      </nav>
+                      <div role="group" aria-label={text.language} className="flex shrink-0 items-center rounded-xl border border-white/15 bg-white/[0.07] p-1 text-xs font-semibold text-white/70 backdrop-blur-xl">
+                        {["en", "tr"].map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            lang={option}
+                            aria-pressed={language === option}
+                            onClick={() => setLanguage(option)}
+                            className={`rounded-lg px-2.5 py-1.5 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-200 ${language === option ? "bg-white/20 text-white shadow-sm" : "hover:bg-white/10 hover:text-white"}`}
+                          >
+                            {option.toUpperCase()}
+                          </button>
+                        ))}
+                      </div>
+                      <button
                         type="button"
                         className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-2xl ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
-                        aria-label="Open menu"
+                        aria-label={open ? text.closeMenu : text.openMenu}
                         aria-expanded={open}
                         onClick={() => setOpen((v) => !v)}
                     >
@@ -89,7 +106,8 @@ export function Navbar() {
                                 />
                             )}
                         </svg>
-                    </button>
+                      </button>
+                    </div>
                 </div>
 
                 <AnimatePresence>
@@ -113,35 +131,35 @@ export function Navbar() {
                                     className="px-6 py-3 hover:bg-white/5 transition"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Home
+                                    {text.home}
                                 </a>
                                 <a
                                     href="#about"
                                     className="px-6 py-3 hover:bg-white/5 transition"
                                     onClick={() => setOpen(false)}
                                 >
-                                    About
+                                    {text.about}
                                 </a>
                                 <a
                                     href="#projects"
                                     className="px-6 py-3 hover:bg-white/5 transition"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Projects
+                                    {text.projects}
                                 </a>
                                 <a
                                     href="#work"
                                     className="px-6 py-3 hover:bg-white/5 transition"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Work
+                                    {text.work}
                                 </a>
                                 <a
                                     href="#contact"
                                     className="px-6 py-3 hover:bg-white/5 transition"
                                     onClick={() => setOpen(false)}
                                 >
-                                    Contact
+                                    {text.contact}
                                 </a>
                             </motion.div>
                         </motion.div>

@@ -2,8 +2,11 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SnowDotsBackground from "../components/background/SnowDotsBackground";
+import { useLanguage } from "../LanguageContext";
 
 export default function Contact() {
+  const { language, copy } = useLanguage();
+  const text = copy.contact;
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -23,15 +26,15 @@ export default function Contact() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
     if (!form.fullName.trim()) {
-      newErrors.fullName = "Please enter your name.";
+      newErrors.fullName = "fullName";
     }
 
     if (!emailRegex.test(form.email)) {
-      newErrors.email = "Please enter a valid email address.";
+      newErrors.email = "email";
     }
 
     if (form.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters.";
+      newErrors.message = "message";
     }
 
     return newErrors;
@@ -45,7 +48,7 @@ export default function Contact() {
     const validationErrors = validate();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
-      toast.error("Please fix the highlighted fields.", {
+      toast.error(text.fixFields, {
         position: "top-right",
         theme: "dark",
         autoClose: 2500,
@@ -70,7 +73,9 @@ export default function Contact() {
       }
 
       if (!res.ok || !data?.ok) {
-        const msg = data?.error ? String(data.error) : "Message could not be sent.";
+        const msg = language === "en" && data?.error
+          ? String(data.error)
+          : text.messageFailed;
         toast.error(msg, {
           position: "top-right",
           theme: "dark",
@@ -79,7 +84,7 @@ export default function Contact() {
         return;
       }
 
-      toast.success("Message sent successfully!", {
+      toast.success(text.messageSent, {
         position: "top-right",
         theme: "dark",
         autoClose: 2500,
@@ -88,7 +93,7 @@ export default function Contact() {
       setForm({ fullName: "", email: "", message: "" });
       setErrors({});
     } catch {
-      toast.error("Server error. Please try again.", {
+      toast.error(text.serverError, {
         position: "top-right",
         theme: "dark",
         autoClose: 3000,
@@ -116,13 +121,13 @@ export default function Contact() {
       <div className="relative z-10 flex justify-center px-6">
         <div className="w-full max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-semibold text-white mb-10 text-center">
-            Let’s Talk
+            {text.heading}
           </h2>
 
           <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] p-8 md:p-10">
             <form onSubmit={onSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm text-white/70 mb-2">Full Name</label>
+                <label className="block text-sm text-white/70 mb-2">{text.fullName}</label>
                 <input
                   type="text"
                   name="fullName"
@@ -135,12 +140,12 @@ export default function Contact() {
                   } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
                 {errors.fullName && (
-                  <p className="mt-2 text-xs text-red-400">{errors.fullName}</p>
+                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.fullName]}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-2">Email</label>
+                <label className="block text-sm text-white/70 mb-2">{text.email}</label>
                 <input
                   type="email"
                   name="email"
@@ -153,25 +158,25 @@ export default function Contact() {
                   } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
                 {errors.email && (
-                  <p className="mt-2 text-xs text-red-400">{errors.email}</p>
+                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.email]}</p>
                 )}
               </div>
 
               <div>
-                <label className="block text-sm text-white/70 mb-2">Message</label>
+                <label className="block text-sm text-white/70 mb-2">{text.message}</label>
                 <textarea
                   name="message"
                   value={form.message}
                   onChange={onChange}
                   rows={4}
-                  placeholder="Describe your project scope, goals, and timeline..."
+                  placeholder={text.messagePlaceholder}
                   required
                   className={`w-full resize-y min-h-[110px] max-h-[260px] rounded-xl border ${
                     errors.message ? "border-red-500/70" : "border-white/10"
                   } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
                 />
                 {errors.message && (
-                  <p className="mt-2 text-xs text-red-400">{errors.message}</p>
+                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.message]}</p>
                 )}
               </div>
 
@@ -190,7 +195,7 @@ export default function Contact() {
               >
                 <span className="relative z-10 flex items-center justify-center">
                   <span className="transition-all duration-300 group-hover:opacity-0">
-                    {isSending ? "Sending..." : "Send"}
+                    {isSending ? text.sending : text.send}
                   </span>
 
                   <svg

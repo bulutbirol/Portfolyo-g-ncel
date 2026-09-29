@@ -1,6 +1,8 @@
 import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
+import { useLanguage } from "../LanguageContext";
 
 export default function Footer() {
+  const { copy } = useLanguage();
   const socials = [
     {
       name: "GitHub",
@@ -26,7 +28,7 @@ export default function Footer() {
         <div />
 
         <div className="text-center text-sm text-white/60 tracking-wide">
-          © 2026 Birol Bulut | All Rights Reserved.
+          {copy.footer}
         </div>
 
         <div className="flex justify-center md:justify-end">

@@ -1,8 +1,11 @@
 import React, { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useLanguage } from "../LanguageContext";
 
 export function Work() {
   const ref = useRef(null);
+  const { copy } = useLanguage();
+  const text = copy.work;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -15,15 +18,8 @@ export function Work() {
   const items = useMemo(
     () => [
       {
-        role: "Full Stack Intern",
+        ...text.entries[0],
         company: "Workintech",
-        period: "Sep 2025 — Mar 2026",
-        location: "Bursa, Türkiye · Remote",
-        highlights: [
-          "Contributed to both front-end and back-end development in real-world projects.",
-          "Wrote clean, maintainable, and scalable code following best practices.",
-          "Collaborated within an agile workflow and structured delivery cycles.",
-        ],
         stack: [
           "React",
           "TailwindCSS",
@@ -42,19 +38,12 @@ export function Work() {
         ],
       },
       {
-        role: "Front-End Developer",
+        ...text.entries[1],
         company: "BBROZ",
-        period: "Feb 2022 — Present",
-        location: "Bursa, Türkiye · In-site",
-        highlights: [
-          "Building responsive and performance-oriented user interfaces.",
-          "Developing reusable component-based UI architectures.",
-          "Maintaining scalable and maintainable front-end codebases.",
-        ],
         stack: ["JavaScript", "HTML", "CSS", "PHP", "jQuery"],
       },
     ],
-    []
+    [text.entries]
   );
 
   return (
@@ -62,10 +51,10 @@ export function Work() {
       <div className="mx-auto max-w-6xl px-5">
         <div className="mb-10 md:mb-14">
           <h2 className="text-white text-3xl md:text-4xl font-semibold tracking-[-0.02em]">
-            Work Experience
+            {text.heading}
           </h2>
           <p className="mt-3 text-white/65 max-w-[62ch]">
-            Roles, impact, and the technologies I’ve worked with.
+            {text.description}
           </p>
         </div>
 
