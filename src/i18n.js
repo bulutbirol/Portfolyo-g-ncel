@@ -54,6 +54,7 @@ export const translations = {
       done: "DONE",
       roles: ["Admin", "Technician", "Customer"],
       cardDescriptions: [
+        "Create short links, track clicks, and turn links off from your account.",
         "A restaurant ordering interface built around a clear menu and cart flow.",
         "Browse movie data with a responsive React interface and predictable Redux state.",
         "A full-stack storefront connecting a product interface to a Node.js backend.",
@@ -161,6 +162,7 @@ export const translations = {
       done: "BİTTİ",
       roles: ["Yönetici", "Teknisyen", "Müşteri"],
       cardDescriptions: [
+        "Hesabından kısa link oluştur, tıklanmaları gör ve istediğinde linklerini kapat.",
         "Anlaşılır menü ve sepet akışına odaklanan bir restoran sipariş arayüzü.",
         "Film verilerini mobil uyumlu bir React arayüzü ve Redux durum yönetimiyle inceleme uygulaması.",
         "Ürün arayüzünü Node.js sunucusuna bağlayan bir e-ticaret uygulaması.",

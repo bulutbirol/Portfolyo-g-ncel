@@ -3,6 +3,12 @@ import { useLanguage } from "../LanguageContext";
 
 const projects = [
   {
+    title: "Shortlink",
+    stack: ["Java", "React", "Neon", "Cloudflare"],
+    live: "https://shortlink-web-eight.vercel.app/",
+    source: "https://github.com/bulutbirol/Link-Shortener",
+  },
+  {
     title: "Pizza Web App",
     stack: ["React", "Redux", "Router", "Tailwind"],
     live: "https://pizza-web-kappa.vercel.app/",
