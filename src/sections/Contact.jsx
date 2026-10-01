@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import SnowDotsBackground from "../components/background/SnowDotsBackground";
 import { useLanguage } from "../LanguageContext";
@@ -104,8 +104,8 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="relative w-full scroll-mt-28 overflow-visible py-24">
-      <div className="absolute left-1/2 -translate-x-1/2 top-0 w-screen h-full pointer-events-none">
+    <section id="contact" className="relative w-full scroll-mt-28 overflow-hidden py-16 md:py-24">
+      <div className="absolute inset-0 pointer-events-none">
         <SnowDotsBackground
           count={120}
           speed={0.035}
@@ -116,15 +116,13 @@ export default function Contact() {
         />
       </div>
 
-      <ToastContainer />
-
-      <div className="relative z-10 flex justify-center px-6">
+      <div className="relative z-10 flex justify-center px-0 sm:px-6">
         <div className="w-full max-w-3xl">
           <h2 className="text-4xl md:text-5xl font-semibold text-white mb-10 text-center">
             {text.heading}
           </h2>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] p-8 md:p-10">
+          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] p-5 sm:p-8 md:p-10">
             <form onSubmit={onSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm text-white/70 mb-2">{text.fullName}</label>

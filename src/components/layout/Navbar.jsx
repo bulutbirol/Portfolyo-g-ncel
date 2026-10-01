@@ -17,10 +17,10 @@ export function Navbar() {
 
     return (
         <header className="fixed top-0 left-0 right-0 z-50">
-            <div className="mx-auto max-w-6xl px-10">
-                <div className="mt-5 flex items-center justify-between rounded-2xl bg-black/30 px-6 py-4 backdrop-blur-md ring-1 ring-white/10">
-                    <a href="#home" className="flex items-center gap-3 group">
-                        <div className="text-white text-xl font-bold tracking-widest">
+            <div className="mx-auto max-w-6xl px-3 sm:px-6 lg:px-10">
+                <div className="mt-3 flex items-center justify-between gap-2 rounded-2xl bg-black/30 px-2 py-2.5 backdrop-blur-md ring-1 ring-white/10 sm:mt-5 sm:px-6 sm:py-4">
+                    <a href="#home" className="flex min-w-0 items-center gap-1 group sm:gap-3">
+                        <div className="hidden text-white text-xl font-bold tracking-widest sm:block">
                             &lt;/&gt;
                         </div>
 
@@ -45,15 +45,15 @@ export function Navbar() {
     "
                             />
 
-                            <div className="relative px-4 py-1.5 rounded-2xl">
-                                <span className="text-white/60 group-hover:text-white transition duration-300">
+                            <div className="relative px-2 py-1.5 rounded-2xl sm:px-4">
+                                <span className="text-sm text-white/60 group-hover:text-white transition duration-300 sm:text-base">
                                     birolweb.dev
                                 </span>
                             </div>
                         </div>
 
                     </a>
-                    <div className="flex items-center gap-2 md:gap-5">
+                      <div className="flex shrink-0 items-center gap-1 md:gap-5">
                       <nav className="hidden md:flex items-center gap-5 text-white/60 font-medium lg:gap-8">
                         <a href="#home" className="hover:text-white transition-colors">{text.home}</a>
                         <a href="#about" className="hover:text-white transition-colors">{text.about}</a>
@@ -69,7 +69,7 @@ export function Navbar() {
                             lang={option}
                             aria-pressed={language === option}
                             onClick={() => setLanguage(option)}
-                            className={`rounded-lg px-2.5 py-1.5 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-200 ${language === option ? "bg-white/20 text-white shadow-sm" : "hover:bg-white/10 hover:text-white"}`}
+                            className={`grid min-h-9 min-w-9 place-items-center rounded-lg px-2 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-200 ${language === option ? "bg-white/20 text-white shadow-sm" : "hover:bg-white/10 hover:text-white"}`}
                           >
                             {option.toUpperCase()}
                           </button>
@@ -77,7 +77,7 @@ export function Navbar() {
                       </div>
                       <button
                         type="button"
-                        className="md:hidden inline-flex items-center justify-center w-10 h-10 rounded-2xl ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
+                        className="md:hidden inline-flex items-center justify-center w-11 h-11 rounded-2xl ring-1 ring-white/10 bg-white/5 hover:bg-white/10 transition"
                         aria-label={open ? text.closeMenu : text.openMenu}
                         aria-expanded={open}
                         onClick={() => setOpen((v) => !v)}

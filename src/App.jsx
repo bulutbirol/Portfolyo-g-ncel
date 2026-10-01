@@ -11,14 +11,14 @@ import Footer from "./sections/Footer";
 import { LanguageProvider } from "./LanguageProvider";
 import "react-toastify/dist/ReactToastify.css";
 
-export default function App() {
+export default function App({ initialLanguage = "en" }) {
   return (
-    <LanguageProvider>
+    <LanguageProvider initialLanguage={initialLanguage}>
       <ToastContainer position="bottom-right" newestOnTop />
       <AuroraBackground strength={140}>
         <div className="min-h-screen">
           <Navbar />
-          <main className="mx-auto max-w-6xl px-10 pt-32 md:pt-36">
+          <main className="mx-auto max-w-6xl px-4 pt-28 sm:px-6 md:pt-36 lg:px-10">
             <Hero />
             <About />
             <Projects />

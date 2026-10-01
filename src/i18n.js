@@ -18,6 +18,8 @@ export const translations = {
       explore: "Explore projects",
       latest: "Latest work",
       latestDescription: "ServiceFlow · Field service management",
+      playfulLabel: "See how an idea becomes a product",
+      playfulSteps: ["Idea", "Code", "Ship"],
     },
     about: {
       heading: "About Me",
@@ -126,6 +128,8 @@ export const translations = {
       explore: "Projeleri incele",
       latest: "Son çalışma",
       latestDescription: "ServiceFlow · Saha servis yönetimi",
+      playfulLabel: "Bir fikrin ürüne dönüşümünü gör",
+      playfulSteps: ["Fikir", "Kod", "Yayın"],
     },
     about: {
       heading: "Hakkımda",

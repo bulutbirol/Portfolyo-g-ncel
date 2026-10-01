@@ -1,32 +1,14 @@
-import { useEffect, useMemo, useState } from "react";
 import { LanguageContext } from "./LanguageContext";
-import { getLanguage, translations } from "./i18n";
+import { translations } from "./i18n";
 
-export function LanguageProvider({ children }) {
-  const [language, setLanguage] = useState(() => {
-    try {
-      return getLanguage(typeof window === "undefined" ? null : window.localStorage);
-    } catch {
-      return "en";
-    }
-  });
+export function LanguageProvider({ children, initialLanguage = "en" }) {
+  const language = initialLanguage === "tr" ? "tr" : "en";
+  const setLanguage = (nextLanguage) => {
+    if (nextLanguage === language || typeof window === "undefined") return;
+    window.location.assign(`${nextLanguage === "tr" ? "/tr/" : "/"}${window.location.hash}`);
+  };
 
-  useEffect(() => {
-    document.documentElement.lang = language;
-    document.title = language === "tr"
-      ? "Birol Bulut | Full Stack Geliştirici"
-      : "Birol Bulut | Full-Stack Developer";
-    try {
-      window.localStorage.setItem("birolweb-language", language);
-    } catch {
-      // The language still works when storage is unavailable.
-    }
-  }, [language]);
-
-  const value = useMemo(
-    () => ({ language, setLanguage, copy: translations[language] }),
-    [language]
-  );
+  const value = { language, setLanguage, copy: translations[language] };
 
   return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }

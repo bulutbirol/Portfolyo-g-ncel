@@ -61,15 +61,15 @@ export default function Projects() {
   const { copy } = useLanguage();
   const text = copy.projects;
   return (
-    <section id="projects" className="relative scroll-mt-28 py-20 md:py-28">
+    <section id="projects" className="relative scroll-mt-28 py-16 md:py-28">
       <div className="mb-10 max-w-3xl">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.22em] text-sky-200/75">{text.eyebrow}</p>
         <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white md:text-5xl">{text.heading}</h2>
         <p className="mt-4 text-base leading-7 text-white/65">{text.description}</p>
       </div>
 
-      <article className="liquidGlass rounded-[2rem]">
-        <div className="relative grid gap-10 p-6 sm:p-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
+      <article className="liquidGlass projectGlow rounded-[1.5rem] sm:rounded-[2rem]">
+        <div className="relative grid gap-7 p-5 sm:gap-10 sm:p-9 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:p-12">
           <div className="flex flex-col items-start">
             <div className="liquidGlassInner mb-7 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-sky-100">
               <span className="h-1.5 w-1.5 rounded-full bg-sky-200" /> {text.featured}
@@ -112,7 +112,7 @@ export default function Projects() {
 
       <div className="mt-5 grid gap-5 md:grid-cols-2">
         {projects.map((project, index) => (
-          <article key={project.title} className="liquidGlass flex flex-col rounded-[1.5rem] p-6 transition hover:-translate-y-1 hover:border-white/30 hover:bg-white/[0.09] sm:p-8">
+          <article key={project.title} className="liquidGlass projectGlow flex flex-col rounded-[1.5rem] p-5 sm:p-8">
             <h3 className="text-2xl font-semibold tracking-[-0.03em] text-white">{project.title}</h3>
             <p className="mt-3 flex-1 text-sm leading-7 text-white/60">{text.cardDescriptions[index]}</p>
             <div className="mt-6 flex flex-wrap gap-x-4 gap-y-2 text-xs font-medium text-sky-200/80">

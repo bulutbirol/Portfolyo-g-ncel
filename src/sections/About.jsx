@@ -85,7 +85,7 @@ export function About() {
   const { copy } = useLanguage();
   const text = copy.about;
   return (
-    <section id="about" className="scroll-mt-28 py-24">
+    <section id="about" className="scroll-mt-28 py-16 md:py-24">
       <h2 className="text-white text-4xl md:text-5xl font-semibold mb-10">{text.heading}</h2>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">

@@ -22,7 +22,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full px-6 pb-8 pt-6">
+    <footer className="w-full px-1 pb-8 pt-4 sm:px-6 sm:pt-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-end gap-6">
         
         <div />
