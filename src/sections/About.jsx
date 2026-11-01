@@ -1,85 +1,24 @@
 import React from "react";
 import { useLanguage } from "../LanguageContext";
 
-function OrbitRing({ items, size = "320px", duration = 18, reverse = false, startDeg = -30 }) {
-  const step = 360 / items.length;
-
-  return (
-    <div className={`aboutOrbitRing ${reverse ? "reverse" : ""}`} style={{ "--size": size, "--duration": `${duration}s` }}>
-      {items.map((it, i) => {
-        const angle = startDeg + i * step;
-        return (
-          <div key={`${it.alt}-${i}`} className="aboutOrbitSlot" style={{ "--angle": `${angle}deg` }}>
-            <div className="aboutOrbitItem" title={it.alt}>
-              <img src={it.src} alt={it.alt} draggable="false" loading="lazy" />
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
-const SQL_ICON =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <rect x="10" y="10" width="44" height="44" rx="14" fill="#0b1220" opacity="0.65"/>
-    <text x="32" y="40" text-anchor="middle" font-family="Arial" font-size="20" font-weight="800" fill="#60A5FA">SQL</text>
-  </svg>
-`);
-
-const HIBERNATE_ICON =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <rect x="10" y="10" width="44" height="44" rx="14" fill="#0b1220" opacity="0.65"/>
-    <text x="32" y="40" text-anchor="middle" font-family="Arial" font-size="14" font-weight="900" fill="#BCA352">HIB</text>
-  </svg>
-`);
-
-const REACT_QUERY_ICON =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-    <rect x="10" y="10" width="44" height="44" rx="14" fill="#0b1220" opacity="0.65"/>
-    <text x="32" y="40" text-anchor="middle" font-family="Arial" font-size="16" font-weight="900" fill="#FF4154">RQ</text>
-  </svg>
-`);
-
-const SPRING_ICON =
-  "data:image/svg+xml;utf8," +
-  encodeURIComponent(`
-  <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64">
-    <text x="50%" y="55%" text-anchor="middle"
-      font-family="Arial"
-      font-size="16"
-      font-weight="900"
-      fill="#6DB33F">Spring</text>
-  </svg>
-`);
-
 const STACK = [
-  { src: "https://skillicons.dev/icons?i=react", alt: "React" },
-  { src: "https://skillicons.dev/icons?i=redux", alt: "Redux" },
-  { src: "https://skillicons.dev/icons?i=html", alt: "HTML" },
-  { src: "https://skillicons.dev/icons?i=css", alt: "CSS" },
-  { src: "https://skillicons.dev/icons?i=js", alt: "JS" },
-  { src: "https://skillicons.dev/icons?i=java", alt: "Java" },
-  { src: SQL_ICON, alt: "SQL" },
-  { src: "https://skillicons.dev/icons?i=mongodb", alt: "MongoDB" },
-  { src: "https://skillicons.dev/icons?i=postgres", alt: "PostgreSQL" },
-  { src: "https://skillicons.dev/icons?i=cypress", alt: "Cypress" },
-  { src: HIBERNATE_ICON, alt: "Hibernate" },
-  { src: REACT_QUERY_ICON, alt: "React Query" },
-  { src: "https://skillicons.dev/icons?i=tailwind", alt: "TailwindCSS" },
-  { src: "https://skillicons.dev/icons?i=git", alt: "Git" },
-  { src: "https://skillicons.dev/icons?i=vite", alt: "Vite" },
-  { src: SPRING_ICON, alt: "Spring Boot" },
+  "React",
+  "Redux",
+  "HTML",
+  "CSS",
+  "JS",
+  "Java",
+  "SQL",
+  "MongoDB",
+  "PostgreSQL",
+  "Cypress",
+  "Hibernate",
+  "React Query",
+  "TailwindCSS",
+  "Git",
+  "Vite",
+  "Spring Boot",
 ];
-
-const outer = STACK.slice(0, 7);
-const inner = STACK.slice(7);
 
 export function About() {
   const { copy } = useLanguage();
@@ -151,9 +90,10 @@ export function About() {
                 </p>
               </div>
 
-              <div className="orbitPeekWrapper" aria-hidden="true" style={{ "--item": "40px", "--stroke": "1px" }}>
-                <OrbitRing items={outer} size={"340px"} duration={20} startDeg={-30} />
-                <OrbitRing items={inner} size={"240px"} duration={14} reverse startDeg={12} />
+              <div className="flex flex-wrap gap-2">
+                {STACK.map((item) => (
+                  <span key={item} className="px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 text-white/70 text-sm">{item}</span>
+                ))}
               </div>
             </div>
           </div>

@@ -48,3 +48,11 @@ test("CV and share image referenced by the pages exist", async () => {
   assert.ok(pdf.size > 100_000);
   assert.ok(image.size > 10_000);
 });
+
+test("pages do not load third-party runtime assets", async () => {
+  for (const page of ["index.html", "tr/index.html"]) {
+    const html = await read(page);
+    assert.doesNotMatch(html, /skillicons\.dev/);
+    assert.doesNotMatch(html, /unpkg\.com/);
+  }
+});

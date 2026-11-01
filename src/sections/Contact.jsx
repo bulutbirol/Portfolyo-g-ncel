@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import SnowDotsBackground from "../components/background/SnowDotsBackground";
 import { useLanguage } from "../LanguageContext";
 
 export default function Contact() {
@@ -105,16 +104,6 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative w-full scroll-mt-28 overflow-hidden py-16 md:py-24">
-      <div className="absolute inset-0 pointer-events-none">
-        <SnowDotsBackground
-          count={120}
-          speed={0.035}
-          parallax={26}
-          windStrength={1.6}
-          opacity={0.32}
-          className="w-full h-full"
-        />
-      </div>
 
       <div className="relative z-10 flex justify-center px-0 sm:px-6">
         <div className="w-full max-w-3xl">

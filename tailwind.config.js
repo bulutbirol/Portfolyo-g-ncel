@@ -1,19 +1,17 @@
 export default {
-    content: ["./index.html", "./src/**/*.{js,jsx}"],
-    theme: {
-extend: {
-  keyframes: {
-    aurora: {
-      from: { backgroundPosition: "50% 50%, 50% 50%" },
-      to: { backgroundPosition: "350% 50%, 350% 50%" },
+  content: ["./index.html", "./src/**/*.{js,jsx}"],
+  theme: {
+    extend: {
+      colors: {
+        ink: "#07080c",
+        fog: "#9aa0ae",
+        mute: "#5b6070",
+      },
+      fontFamily: {
+        sans: ["Geist Variable", "ui-sans-serif", "system-ui", "sans-serif"],
+        mono: ["Geist Mono Variable", "ui-monospace", "monospace"],
+      },
     },
   },
-  animation: {
-    aurora: "aurora 12s linear infinite",
-    spin: "spin 4s linear infinite",
-  },
-},
-
-    },
-    plugins: [],
+  plugins: [],
 };

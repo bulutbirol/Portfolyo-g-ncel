@@ -1,5 +1,4 @@
-import React from "react";
-import { AuroraBackground } from "./components/background/AuroraBackground";
+import { MotionConfig } from "framer-motion";
 import { Navbar } from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
 import { About } from "./sections/About";
@@ -14,8 +13,8 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App({ initialLanguage = "en" }) {
   return (
     <LanguageProvider initialLanguage={initialLanguage}>
-      <ToastContainer position="bottom-right" newestOnTop />
-      <AuroraBackground strength={140}>
+      <MotionConfig reducedMotion="user">
+        <ToastContainer position="bottom-right" newestOnTop theme="dark" />
         <div className="min-h-screen">
           <Navbar />
           <main className="mx-auto max-w-6xl px-4 pt-28 sm:px-6 md:pt-36 lg:px-10">
@@ -27,7 +26,7 @@ export default function App({ initialLanguage = "en" }) {
             <Footer />
           </main>
         </div>
-      </AuroraBackground>
+      </MotionConfig>
     </LanguageProvider>
   );
 }
