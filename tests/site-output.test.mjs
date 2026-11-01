@@ -56,3 +56,12 @@ test("pages do not load third-party runtime assets", async () => {
     assert.doesNotMatch(html, /unpkg\.com/);
   }
 });
+
+test("prerendered content stays visible without JavaScript", async () => {
+  const html = await read("index.html");
+  const head = html.slice(0, html.indexOf("</head>"));
+  assert.match(head, /document\.documentElement\.classList\.add\("js"\)/);
+  const cssFile = html.match(/href="\/(assets\/[^"]+\.css)"/)[1];
+  const css = await read(cssFile);
+  assert.match(css, /html:not\(\.js\) \[style\*=["']?opacity:0["']?\]/);
+});
