@@ -55,13 +55,13 @@ export const translations = {
       steps: ["Customer request", "Quote & approval", "Technician schedule", "Completed work"],
       done: "DONE",
       roles: ["Admin", "Technician", "Customer"],
-      cardDescriptions: [
-        "Create short links, track clicks, and turn links off from your account.",
-        "A restaurant ordering interface built around a clear menu and cart flow.",
-        "Browse movie data with a responsive React interface and predictable Redux state.",
-        "A full-stack storefront connecting a product interface to a Node.js backend.",
-        "A focused watchlist experience for keeping track of films to revisit.",
-      ],
+      descriptions: {
+        shortlink: "Create short links, track clicks, and turn links off from your account.",
+        pizza: "A restaurant ordering interface built around a clear menu and cart flow.",
+        movies: "Browse movie data with a responsive React interface and predictable Redux state.",
+        ecommerce: "A full-stack storefront connecting a product interface to a Node.js backend.",
+        watchlist: "A focused watchlist experience for keeping track of films to revisit.",
+      },
     },
     work: {
       heading: "Work Experience",
@@ -165,13 +165,13 @@ export const translations = {
       steps: ["Müşteri talebi", "Teklif ve onay", "Teknisyen planı", "Tamamlanan iş"],
       done: "BİTTİ",
       roles: ["Yönetici", "Teknisyen", "Müşteri"],
-      cardDescriptions: [
-        "Hesabından kısa link oluştur, tıklanmaları gör ve istediğinde linklerini kapat.",
-        "Anlaşılır menü ve sepet akışına odaklanan bir restoran sipariş arayüzü.",
-        "Film verilerini mobil uyumlu bir React arayüzü ve Redux durum yönetimiyle inceleme uygulaması.",
-        "Ürün arayüzünü Node.js sunucusuna bağlayan bir e-ticaret uygulaması.",
-        "İzlenecek filmleri takip etmek için geliştirilmiş sade bir liste uygulaması.",
-      ],
+      descriptions: {
+        shortlink: "Hesabından kısa link oluştur, tıklanmaları gör ve istediğinde linklerini kapat.",
+        pizza: "Anlaşılır menü ve sepet akışına odaklanan bir restoran sipariş arayüzü.",
+        movies: "Film verilerini mobil uyumlu bir React arayüzü ve Redux durum yönetimiyle inceleme uygulaması.",
+        ecommerce: "Ürün arayüzünü Node.js sunucusuna bağlayan bir e-ticaret uygulaması.",
+        watchlist: "İzlenecek filmleri takip etmek için geliştirilmiş sade bir liste uygulaması.",
+      },
     },
     work: {
       heading: "İş Deneyimi",

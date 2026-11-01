@@ -64,3 +64,12 @@ test("about keeps CV download, contact CTA and stack as text", async () => {
   assert.match(html, />Spring Boot</);
   assert.doesNotMatch(html, /<img/);
 });
+
+test("every project row has its own description and demo link", async () => {
+  const html = await render("/src/sections/Projects.jsx", "default", {}, "en");
+  assert.match(html, /Create short links, track clicks, and turn links off from your account\./);
+  assert.match(html, /aria-label="Open Shortlink live demo"/);
+  assert.equal((html.match(/data-project-row/g) || []).length, 5);
+  assert.match(html, /serviceflow-web-ten\.vercel\.app/);
+  assert.match(html, /FSM-Platform-Project/);
+});
