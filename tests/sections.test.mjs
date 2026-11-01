@@ -54,3 +54,13 @@ test("marquee duplicate copy is hidden from screen readers", async () => {
   assert.match(html, /aria-hidden="true"/);
   assert.equal((html.match(/>React</g) || []).length, 2);
 });
+
+test("about keeps CV download, contact CTA and stack as text", async () => {
+  const html = await render("/src/sections/About.jsx", "About", {}, "en");
+  assert.match(html, /01 · About Me/);
+  assert.match(html, /href="\/cv\.pdf"/);
+  assert.match(html, /download="Birol-Bulut-CV\.pdf"/);
+  assert.match(html, /href="#contact"/);
+  assert.match(html, />Spring Boot</);
+  assert.doesNotMatch(html, /<img/);
+});
