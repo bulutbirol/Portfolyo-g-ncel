@@ -8,6 +8,7 @@ test("the navigation offers English and Turkish", async () => {
   const vite = await createServer({
     appType: "custom",
     configFile: false,
+    esbuild: { jsx: "automatic" },
     logLevel: "silent",
     root: process.cwd(),
     server: { middlewareMode: true },
@@ -19,6 +20,9 @@ test("the navigation offers English and Turkish", async () => {
     assert.match(html, /aria-label="Language"/);
     assert.match(html, />EN</);
     assert.match(html, />TR</);
+    for (const id of ["home", "about", "projects", "work", "contact"]) assert.match(html, new RegExp(`href="#${id}"`));
+    assert.match(html, /aria-expanded="false"/);
+    assert.match(html, /aria-controls="mobile-menu"/);
   } finally {
     await vite.close();
   }
