@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { FiArrowDownRight, FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { useLanguage } from "../../LanguageContext";
 import { ease, fadeUp, stagger } from "../../motion";
@@ -42,12 +42,14 @@ export default function Hero() {
           <span className="sr-only">{`${text.title} ${text.titleAccent}`}</span>
           <motion.span aria-hidden="true" variants={stagger(0.06)} className="block">
             {words.map(({ w, accent }, i) => (
-              <span key={`${w}-${i}`} className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-                <motion.span variants={word} className={`inline-block ${accent ? "text-mute" : ""}`}>
-                  {w}
-                </motion.span>
+              <Fragment key={`${w}-${i}`}>
+                <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
+                  <motion.span variants={word} className={`inline-block ${accent ? "text-mute" : ""}`}>
+                    {w}
+                  </motion.span>
+                </span>
                 {i < words.length - 1 && " "}
-              </span>
+              </Fragment>
             ))}
           </motion.span>
         </h1>

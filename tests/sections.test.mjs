@@ -47,6 +47,7 @@ test("hero keeps its actions and the full headline in markup", async () => {
   assert.match(html, /href="#projects"/);
   assert.match(html, /github\.com\/bulutbirol/);
   assert.match(html, /Spring Boot/);
+  assert.match(html, /İşleri<\/span><\/span> <span/);
 });
 
 test("marquee duplicate copy is hidden from screen readers", async () => {

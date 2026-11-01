@@ -38,7 +38,7 @@ export function About() {
       <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <motion.div variants={fadeUp}>
           <p className="text-lg text-fog">{text.greeting}</p>
-          <p className="mt-4 text-3xl font-medium leading-[1.15] tracking-[-0.03em] text-white md:text-5xl">{text.description}</p>
+          <p className="mt-4 text-2xl font-medium leading-[1.15] tracking-[-0.03em] text-white sm:text-3xl md:text-5xl">{text.description}</p>
           <div className="mt-6 flex flex-wrap gap-2">
             {["React", "Spring Boot", "PostgreSQL", text.productThinking].map((item) => (
               <span key={item} className={chip}>{item}</span>
