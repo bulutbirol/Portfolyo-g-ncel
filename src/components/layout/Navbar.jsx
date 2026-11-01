@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useLanguage } from "../../LanguageContext";
 import { ease } from "../../motion";
 
@@ -11,6 +11,8 @@ export function Navbar() {
   const [active, setActive] = useState("home");
   const { language, setLanguage, copy } = useLanguage();
   const text = copy.nav;
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 });
 
   useEffect(() => {
     const onResize = () => {
@@ -118,6 +120,13 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      <motion.div
+        data-scroll-progress
+        aria-hidden="true"
+        style={{ scaleX: progress }}
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-white/0 via-white/70 to-white"
+      />
 
       <AnimatePresence>
         {open && (

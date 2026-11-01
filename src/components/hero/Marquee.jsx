@@ -12,7 +12,7 @@ export default function Marquee({ items }) {
 
   return (
     <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-      <div className="flex w-max animate-marquee font-mono text-xs uppercase tracking-[0.2em] text-mute hover:[animation-play-state:paused] motion-reduce:animate-none">
+      <div className="flex w-max animate-marquee font-mono text-xs uppercase tracking-[0.2em] text-mute hover:[animation-play-state:paused]">
         {row(false)}
         {row(true)}
       </div>

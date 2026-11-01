@@ -3,6 +3,7 @@ import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
+import { Spotlight } from "../components/Spotlight";
 import { fadeUp, stagger } from "../motion";
 
 const STACK = [
@@ -55,7 +56,7 @@ export function About() {
         </motion.div>
 
         <motion.div variants={stagger(0.08)} className="grid gap-3 sm:grid-cols-2">
-          <motion.div variants={fadeUp} className={tile}>
+          <Spotlight variants={fadeUp} className={tile}>
             <h3 className="font-medium text-white">{text.principles}</h3>
             <p className="mt-2 text-sm leading-6 text-fog">{text.principlesDescription}</p>
             <div className="mt-4 flex flex-wrap gap-2">
@@ -63,15 +64,15 @@ export function About() {
                 <span key={item} className={chip}>{item}</span>
               ))}
             </div>
-          </motion.div>
+          </Spotlight>
 
-          <motion.div variants={fadeUp} className={tile}>
+          <Spotlight variants={fadeUp} className={tile}>
             <h3 className="font-medium text-white">{text.location}</h3>
             <p className="mt-2 text-sm leading-6 text-fog">{text.locationDescription}</p>
             <p className="mt-4 font-mono text-xs text-mute">Bursa · UTC+3</p>
-          </motion.div>
+          </Spotlight>
 
-          <motion.div variants={fadeUp} className={`${tile} sm:col-span-2`}>
+          <Spotlight variants={fadeUp} className={`${tile} sm:col-span-2`}>
             <h3 className="font-medium text-white">{text.stack}</h3>
             <p className="mt-2 text-sm leading-6 text-fog">{text.stackDescription}</p>
             <ul className="mt-4 flex flex-wrap gap-2">
@@ -79,9 +80,10 @@ export function About() {
                 <li key={item} className={`${chip} transition-colors hover:border-white/30 hover:text-white`}>{item}</li>
               ))}
             </ul>
-          </motion.div>
+          </Spotlight>
 
-          <motion.a
+          <Spotlight
+            as="a"
             variants={fadeUp}
             href="#contact"
             className={`${tile} group flex items-center justify-between gap-4 sm:col-span-2`}
@@ -92,7 +94,7 @@ export function About() {
               <span className="mt-3 block text-sm text-white">{text.ctaButton}</span>
             </span>
             <FiArrowUpRight aria-hidden="true" className="shrink-0 text-2xl text-fog transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-white" />
-          </motion.a>
+          </Spotlight>
         </motion.div>
       </div>
     </Reveal>

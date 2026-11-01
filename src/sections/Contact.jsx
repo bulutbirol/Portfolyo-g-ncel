@@ -6,6 +6,7 @@ import { FiArrowRight } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
+import { SplitText } from "../components/SplitText";
 import { fadeUp, stagger } from "../motion";
 
 export default function Contact() {
@@ -118,7 +119,7 @@ export default function Contact() {
 
       <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <motion.h2 variants={fadeUp} className="text-5xl font-semibold leading-[0.95] tracking-[-0.05em] text-white md:text-7xl">
-          {text.heading}
+          <SplitText text={text.heading} />
           <span className="text-mute">.</span>
         </motion.h2>
 

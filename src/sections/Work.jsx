@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
+import { SplitText } from "../components/SplitText";
 import { fadeUp, stagger } from "../motion";
 
 export function Work() {
@@ -53,7 +54,7 @@ export function Work() {
       <SectionLabel index={3}>{copy.nav.work}</SectionLabel>
       <motion.div variants={fadeUp} className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
-          {text.heading}
+          <SplitText text={text.heading} />
           <span className="text-mute">.</span>
         </h2>
         <p className="max-w-sm text-fog">{text.description}</p>

@@ -1,21 +1,20 @@
-import { motion } from "framer-motion";
-import { Fragment, useState } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Fragment, useRef, useState } from "react";
 import { FiArrowDownRight, FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { useLanguage } from "../../LanguageContext";
-import { ease, fadeUp, stagger } from "../../motion";
+import { fadeUp, stagger, word } from "../../motion";
 import Marquee from "./Marquee";
 
 const STACK = ["React", "Redux", "React Query", "Spring Boot", "Java", "Hibernate", "PostgreSQL", "MongoDB", "Node.js", "TailwindCSS", "Cypress", "Vite"];
-
-const word = {
-  hidden: { y: "110%" },
-  show: { y: "0%", transition: { duration: 0.9, ease } },
-};
 
 export default function Hero() {
   const { copy } = useLanguage();
   const text = copy.hero;
   const [step, setStep] = useState(0);
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const words = [
     ...text.title.split(" ").map((w) => ({ w, accent: false })),
@@ -23,16 +22,16 @@ export default function Hero() {
   ];
 
   return (
-    <section id="home" className="relative flex scroll-mt-28 flex-col justify-center pb-12 pt-6 md:min-h-[86svh] md:pb-16">
+    <section ref={ref} id="home" className="relative flex scroll-mt-28 flex-col justify-center pb-12 pt-6 md:min-h-[86svh] md:pb-16">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -inset-x-40 -top-40 bottom-0 -z-10 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_30%_30%,#000,transparent_70%)]"
       />
 
-      <motion.div initial="hidden" animate="show" variants={stagger(0.12)}>
+      <motion.div initial="hidden" animate="show" variants={stagger(0.12)} style={{ y, opacity }}>
         <motion.p variants={fadeUp} className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fog">
           <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60 motion-reduce:animate-none" />
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
             <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
           </span>
           {text.greeting}

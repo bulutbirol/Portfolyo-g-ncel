@@ -3,6 +3,8 @@ import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
+import { SplitText } from "../components/SplitText";
+import { Spotlight } from "../components/Spotlight";
 import { fadeUp, stagger } from "../motion";
 
 const projects = [
@@ -78,13 +80,14 @@ export default function Projects() {
       <SectionLabel index={2}>{text.eyebrow}</SectionLabel>
       <motion.div variants={fadeUp} className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
-          {text.heading}
+          <SplitText text={text.heading} />
           <span className="text-mute">.</span>
         </h2>
         <p className="max-w-sm text-fog">{text.description}</p>
       </motion.div>
 
-      <motion.article
+      <Spotlight
+        as="article"
         variants={fadeUp}
         className="grid gap-10 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 transition-colors duration-500 hover:border-white/20 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14"
       >
@@ -125,7 +128,7 @@ export default function Projects() {
           </motion.ol>
           <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.15em] text-mute">{text.roles.join(" · ")}</p>
         </div>
-      </motion.article>
+      </Spotlight>
 
       <motion.ul variants={stagger(0.06)} className="mt-6 border-b border-white/[0.08]">
         {projects.map((project, index) => (
@@ -137,7 +140,7 @@ export default function Projects() {
           >
             <span className="pt-1 font-mono text-xs text-mute md:pt-3">{String(index + 1).padStart(2, "0")}</span>
             <div className="min-w-0">
-              <h3 className="text-2xl font-medium tracking-[-0.03em] text-white/80 transition duration-500 group-focus-within:translate-x-2 group-focus-within:text-white group-hover:translate-x-2 group-hover:text-white motion-reduce:transform-none md:text-4xl">
+              <h3 className="text-2xl font-medium tracking-[-0.03em] text-white/80 transition duration-500 group-focus-within:translate-x-2 group-focus-within:text-white group-hover:translate-x-2 group-hover:text-white md:text-4xl">
                 {project.title}
               </h3>
               <div className="grid transition-[grid-template-rows] duration-500 [@media(hover:hover)_and_(min-width:768px)]:grid-rows-[0fr] md:group-focus-within:grid-rows-[1fr] md:group-hover:grid-rows-[1fr]">

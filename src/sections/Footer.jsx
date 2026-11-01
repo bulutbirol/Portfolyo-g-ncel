@@ -25,7 +25,7 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.name}
-              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-fog transition hover:-translate-y-0.5 hover:border-white/30 hover:text-white motion-reduce:transform-none"
+              className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-fog transition hover:-translate-y-0.5 hover:border-white/30 hover:text-white"
             >
               <Icon aria-hidden="true" />
             </a>
@@ -41,7 +41,7 @@ export default function Footer() {
         <a
           href="#home"
           aria-label={copy.nav.home}
-          className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-fog transition hover:-translate-y-0.5 hover:border-white/30 hover:text-white motion-reduce:transform-none"
+          className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-fog transition hover:-translate-y-0.5 hover:border-white/30 hover:text-white"
         >
           <FiArrowUp aria-hidden="true" />
         </a>

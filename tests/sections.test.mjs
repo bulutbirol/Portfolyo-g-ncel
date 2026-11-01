@@ -36,9 +36,29 @@ test("Reveal keeps its content in the server markup", async () => {
   assert.match(html, /<section[^>]*>hello<\/section>/);
 });
 
-test("the app respects the user's reduced motion setting", async () => {
-  const source = await import("node:fs/promises").then((fs) => fs.readFile("src/App.jsx", "utf8"));
-  assert.match(source, /<MotionConfig reducedMotion="user">/);
+test("animations run on every device", async () => {
+  const fs = await import("node:fs/promises");
+  const app = await fs.readFile("src/App.jsx", "utf8");
+  assert.match(app, /<MotionConfig reducedMotion="never">/);
+  const html = await render("/src/components/hero/Hero.jsx", "default", {}, "en");
+  assert.doesNotMatch(html, /motion-reduce:/);
+});
+
+test("navbar shows a scroll progress bar", async () => {
+  const html = await render("/src/components/layout/Navbar.jsx", "Navbar", {}, "en");
+  assert.match(html, /data-scroll-progress/);
+});
+
+test("section headings keep readable text while words animate", async () => {
+  const html = await render("/src/components/SplitText.jsx", "SplitText", { text: "My Selected Projects" });
+  assert.match(html, /<span class="sr-only">My Selected Projects<\/span>/);
+  assert.equal((html.match(/data-word/g) || []).length, 3);
+});
+
+test("cards follow the mouse with a spotlight", async () => {
+  const html = await render("/src/components/Spotlight.jsx", "Spotlight", { className: "x", children: "card" });
+  assert.match(html, /data-spotlight/);
+  assert.match(html, />card</);
 });
 
 test("hero keeps its actions and the full headline in markup", async () => {

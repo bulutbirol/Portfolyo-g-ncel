@@ -13,7 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 export default function App({ initialLanguage = "en" }) {
   return (
     <LanguageProvider initialLanguage={initialLanguage}>
-      <MotionConfig reducedMotion="user">
+      <MotionConfig reducedMotion="never">
         <ToastContainer position="bottom-right" newestOnTop theme="dark" />
         <div className="min-h-screen">
           <Navbar />

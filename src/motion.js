@@ -9,3 +9,8 @@ export const stagger = (step = 0.08) => ({
   hidden: {},
   show: { transition: { staggerChildren: step } },
 });
+
+export const word = {
+  hidden: { y: "110%" },
+  show: { y: "0%", transition: { duration: 0.9, ease } },
+};
