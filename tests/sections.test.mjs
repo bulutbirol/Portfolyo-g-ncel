@@ -122,3 +122,13 @@ test("work shows both roles under a numbered label", async () => {
   assert.match(html, /Workintech/);
   assert.match(html, /BBROZ/);
 });
+
+test("app has a decorative animated background", async () => {
+  const html = await render("/src/App.jsx", "default", {}, "en");
+  assert.match(html, /<div[^>]*data-backdrop[^>]*aria-hidden="true"|<div[^>]*aria-hidden="true"[^>]*data-backdrop/);
+});
+
+test("heading suffix stays on the last word", async () => {
+  const html = await render("/src/components/SplitText.jsx", "SplitText", { text: "Let's Talk", after: "." });
+  assert.match(html, />Talk\.<\/span>/);
+});

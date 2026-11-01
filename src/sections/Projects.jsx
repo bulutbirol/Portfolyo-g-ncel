@@ -80,8 +80,7 @@ export default function Projects() {
       <SectionLabel index={2}>{text.eyebrow}</SectionLabel>
       <motion.div variants={fadeUp} className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
-          <SplitText text={text.heading} />
-          <span className="text-mute">.</span>
+          <SplitText text={text.heading} after={<span className="text-mute">.</span>} />
         </h2>
         <p className="max-w-sm text-fog">{text.description}</p>
       </motion.div>

@@ -119,8 +119,7 @@ export default function Contact() {
 
       <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
         <motion.h2 variants={fadeUp} className="text-5xl font-semibold leading-[0.95] tracking-[-0.05em] text-white md:text-7xl">
-          <SplitText text={text.heading} />
-          <span className="text-mute">.</span>
+          <SplitText text={text.heading} after={<span className="text-mute">.</span>} />
         </motion.h2>
 
         <motion.form variants={fadeUp} onSubmit={onSubmit} className="space-y-8">

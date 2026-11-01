@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { motion } from "framer-motion";
 import { stagger, word } from "../motion";
 
-export function SplitText({ text, className = "" }) {
+export function SplitText({ text, after, className = "" }) {
   const words = text.split(" ");
 
   return (
@@ -14,6 +14,7 @@ export function SplitText({ text, className = "" }) {
             <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
               <motion.span data-word variants={word} className="inline-block">
                 {w}
+                {i === words.length - 1 && after}
               </motion.span>
             </span>
             {i < words.length - 1 && " "}

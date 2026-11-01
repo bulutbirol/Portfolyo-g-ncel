@@ -3,11 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    background-color: #07080c;
+  }
+
   html,
   body,
   #root {
     min-height: 100%;
-    background-color: #07080c;
   }
 
   html,
@@ -16,7 +19,7 @@
   }
 
   body {
-    @apply m-0 bg-ink font-sans text-white antialiased;
+    @apply m-0 font-sans text-white antialiased;
   }
 
   ::selection {

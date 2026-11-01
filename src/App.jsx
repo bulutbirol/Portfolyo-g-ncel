@@ -1,4 +1,5 @@
 import { MotionConfig } from "framer-motion";
+import { Backdrop } from "./components/Backdrop";
 import { Navbar } from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
 import { About } from "./sections/About";
@@ -15,6 +16,7 @@ export default function App({ initialLanguage = "en" }) {
     <LanguageProvider initialLanguage={initialLanguage}>
       <MotionConfig reducedMotion="never">
         <ToastContainer position="bottom-right" newestOnTop theme="dark" />
+        <Backdrop />
         <div className="min-h-screen">
           <Navbar />
           <main className="mx-auto max-w-6xl px-4 pt-28 sm:px-6 md:pt-36 lg:px-10">
