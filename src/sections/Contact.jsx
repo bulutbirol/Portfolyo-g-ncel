@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { motion } from "framer-motion";
@@ -8,6 +8,24 @@ import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
 import { SplitText } from "../components/SplitText";
 import { fadeUp, stagger } from "../motion";
+
+const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
+const TURNSTILE_SRC = "https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit";
+
+function loadTurnstile() {
+  if (window.turnstile) return Promise.resolve(window.turnstile);
+  return new Promise((resolve, reject) => {
+    let script = document.querySelector(`script[src="${TURNSTILE_SRC}"]`);
+    if (!script) {
+      script = document.createElement("script");
+      script.src = TURNSTILE_SRC;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    script.addEventListener("load", () => resolve(window.turnstile));
+    script.addEventListener("error", reject);
+  });
+}
 
 export default function Contact() {
   const { language, copy } = useLanguage();
@@ -20,6 +38,40 @@ export default function Contact() {
 
   const [errors, setErrors] = useState({});
   const [isSending, setIsSending] = useState(false);
+  const [token, setToken] = useState("");
+  const captchaRef = useRef(null);
+  const widgetId = useRef(null);
+
+  useEffect(() => {
+    if (!SITE_KEY) return;
+    let cancelled = false;
+    loadTurnstile()
+      .then((turnstile) => {
+        if (cancelled || !captchaRef.current) return;
+        widgetId.current = turnstile.render(captchaRef.current, {
+          sitekey: SITE_KEY,
+          theme: "dark",
+          language,
+          callback: (value) => {
+            setToken(value);
+            setErrors((p) => ({ ...p, captcha: "" }));
+          },
+          "expired-callback": () => setToken(""),
+          "error-callback": () => setToken(""),
+        });
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+      if (widgetId.current !== null) window.turnstile?.remove(widgetId.current);
+      widgetId.current = null;
+    };
+  }, [language]);
+
+  const resetCaptcha = () => {
+    if (widgetId.current !== null) window.turnstile?.reset(widgetId.current);
+    setToken("");
+  };
 
   const onChange = (e) => {
     setForm((p) => ({ ...p, [e.target.name]: e.target.value }));
@@ -40,6 +92,10 @@ export default function Contact() {
 
     if (form.message.trim().length < 10) {
       newErrors.message = "message";
+    }
+
+    if (SITE_KEY && !token) {
+      newErrors.captcha = "captcha";
     }
 
     return newErrors;
@@ -67,7 +123,7 @@ export default function Contact() {
       const res = await fetch("/api/contact.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, turnstileToken: token }),
       });
 
       let data = null;
@@ -105,6 +161,7 @@ export default function Contact() {
       });
     } finally {
       setIsSending(false);
+      resetCaptcha();
     }
   };
 
@@ -170,6 +227,13 @@ export default function Contact() {
             />
             {errors.message && <p className="mt-2 text-xs text-red-400">{text.errors[errors.message]}</p>}
           </div>
+
+          {SITE_KEY && (
+            <div>
+              <div ref={captchaRef} data-turnstile data-sitekey={SITE_KEY} className="min-h-[65px]" />
+              {errors.captcha && <p className="mt-2 text-xs text-red-400">{text.errors.captcha}</p>}
+            </div>
+          )}
 
           <button
             type="submit"

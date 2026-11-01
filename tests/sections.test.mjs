@@ -132,3 +132,12 @@ test("heading suffix stays on the last word", async () => {
   const html = await render("/src/components/SplitText.jsx", "SplitText", { text: "Let's Talk", after: "." });
   assert.match(html, />Talk\.<\/span>/);
 });
+
+test("contact form includes the Turnstile check", async () => {
+  const html = await render("/src/sections/Contact.jsx", "default", {}, "en");
+  assert.match(html, /data-turnstile/);
+  assert.match(html, /data-sitekey="0x4AAAAAAFuy4JdzQ8rs0DcX"/);
+  const { translations } = await vite.ssrLoadModule("/src/i18n.js");
+  assert.ok(translations.en.contact.errors.captcha);
+  assert.ok(translations.tr.contact.errors.captcha);
+});
