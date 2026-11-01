@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useLanguage } from "../../LanguageContext";
 import { ease } from "../../motion";
@@ -9,6 +9,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("home");
+  const menuButton = useRef(null);
   const { language, setLanguage, copy } = useLanguage();
   const text = copy.nav;
   const { scrollYProgress } = useScroll();
@@ -43,6 +44,17 @@ export function Navbar() {
     });
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e) => {
+      if (e.key !== "Escape") return;
+      setOpen(false);
+      menuButton.current?.focus();
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   const solid = scrolled || open;
 
@@ -98,6 +110,7 @@ export function Navbar() {
           </div>
 
           <button
+            ref={menuButton}
             type="button"
             className="grid h-10 w-10 place-items-center rounded-full border border-white/10 text-white transition hover:border-white/30 md:hidden"
             aria-label={open ? text.closeMenu : text.openMenu}
