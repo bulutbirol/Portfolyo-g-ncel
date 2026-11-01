@@ -50,14 +50,14 @@ function ProjectLinks({ title, live, source, prominent = false }) {
   const { copy } = useLanguage();
   const text = copy.projects;
   const liveClass = prominent
-    ? `group/link inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-white/85 ${focusRing}`
+    ? `group/link inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-ink transition hover:bg-white/85 sm:px-5 sm:py-3 ${focusRing}`
     : `group/link inline-flex items-center gap-1.5 text-sm text-white transition hover:text-fog ${focusRing}`;
   const sourceClass = prominent
-    ? `inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-white transition hover:border-white/40 ${focusRing}`
+    ? `inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-sm font-medium text-white transition hover:border-white/40 sm:px-5 sm:py-3 ${focusRing}`
     : `inline-flex items-center gap-1.5 text-sm text-fog transition hover:text-white ${focusRing}`;
 
   return (
-    <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-5">
       <a href={live} target="_blank" rel="noopener noreferrer" aria-label={text.openDemo.replace("{title}", title)} className={liveClass}>
         {text.liveDemo}
         <FiArrowUpRight aria-hidden="true" className="transition-transform duration-300 group-hover/link:-translate-y-0.5 group-hover/link:translate-x-0.5" />
@@ -76,7 +76,7 @@ export default function Projects() {
   const text = copy.projects;
 
   return (
-    <Reveal as="section" id="projects" variants={stagger(0.1)} className="relative scroll-mt-28 py-20 md:py-32">
+    <Reveal as="section" id="projects" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-32">
       <SectionLabel index={2}>{text.eyebrow}</SectionLabel>
       <motion.div variants={fadeUp} className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
         <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
@@ -88,7 +88,7 @@ export default function Projects() {
       <Spotlight
         as="article"
         variants={fadeUp}
-        className="grid gap-10 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-6 transition-colors duration-500 hover:border-white/20 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14"
+        className="grid gap-10 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-5 transition-colors duration-500 hover:border-white/20 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14"
       >
         <div className="flex flex-col items-start">
           <p className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-fog">{text.featured}</p>
@@ -99,12 +99,12 @@ export default function Projects() {
               <span key={item} className="rounded-full border border-white/10 px-3 py-1 text-xs text-fog">{item}</span>
             ))}
           </div>
-          <div className="mt-auto pt-10">
+          <div className="mt-auto pt-8 sm:pt-10">
             <ProjectLinks title="ServiceFlow" live="https://serviceflow-web-ten.vercel.app/" source="https://github.com/bulutbirol/FSM-Platform-Project" prominent />
           </div>
         </div>
 
-        <div aria-hidden="true" className="rounded-2xl border border-white/[0.08] bg-ink p-5 sm:p-6">
+        <div aria-hidden="true" className="rounded-2xl border border-white/[0.08] bg-ink p-4 sm:p-6">
           <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 font-mono text-[11px] tracking-[0.15em]">
             <span className="text-mute">{text.workflowLabel}</span>
             <span className="flex items-center gap-2 text-emerald-400">
@@ -135,7 +135,7 @@ export default function Projects() {
             key={project.id}
             data-project-row
             variants={fadeUp}
-            className="group grid grid-cols-[2.5rem_1fr] gap-x-4 gap-y-4 border-t border-white/[0.08] py-6 md:grid-cols-[3.5rem_1fr_auto] md:items-start md:py-8"
+            className="group grid grid-cols-[1.75rem_1fr] gap-x-3 gap-y-4 border-t border-white/[0.08] py-6 md:grid-cols-[3.5rem_1fr_auto] md:items-start md:py-8"
           >
             <span className="pt-1 font-mono text-xs text-mute md:pt-3">{String(index + 1).padStart(2, "0")}</span>
             <div className="min-w-0">

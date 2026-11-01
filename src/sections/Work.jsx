@@ -50,9 +50,9 @@ export function Work() {
   );
 
   return (
-    <Reveal as="section" id="work" variants={stagger(0.1)} className="relative scroll-mt-28 py-20 md:py-32">
+    <Reveal as="section" id="work" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-32">
       <SectionLabel index={3}>{copy.nav.work}</SectionLabel>
-      <motion.div variants={fadeUp} className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <motion.div variants={fadeUp} className="mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
         <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
           <SplitText text={text.heading} after={<span className="text-mute">.</span>} />
         </h2>
@@ -66,7 +66,7 @@ export function Work() {
           className="absolute bottom-0 left-0 top-0 w-px bg-white md:left-[200px]"
         />
 
-        <div className="space-y-16">
+        <div className="space-y-12 md:space-y-16">
           {items.map((it) => (
             <Reveal
               key={it.company}
@@ -87,7 +87,7 @@ export function Work() {
 
                 <ul className="mt-6 space-y-3">
                   {it.highlights.map((h) => (
-                    <motion.li key={h} variants={fadeUp} className="flex gap-3 leading-7 text-white/75">
+                    <motion.li key={h} variants={fadeUp} className="flex gap-3 text-[15px] leading-7 text-white/75 sm:text-base">
                       <span className="mt-3 h-px w-3 shrink-0 bg-white/30" />
                       <span>{h}</span>
                     </motion.li>

@@ -24,8 +24,14 @@ export const translations = {
     about: {
       heading: "About Me",
       greeting: "Hi, I'm Birol Bulut",
-      description: "I build React interfaces and Java services that turn busy business processes into clear steps. I care about useful details, reliable data, and products people can actually use.",
-      productThinking: "Product thinking",
+      lead: "I turn busy business processes",
+      leadAccent: "into clear steps.",
+      detail: "I build the React interfaces and Java services behind them, and I care about three things:",
+      values: [
+        { title: "Useful details", text: "Small touches that shorten someone's workday." },
+        { title: "Reliable data", text: "Records that stay accurate, consistent and traceable." },
+        { title: "Products people use", text: "Built for daily use, not just for a demo." },
+      ],
       downloadCv: "Download CV",
       ctaHeading: "Let’s build something",
       ctaDescription: "Have a project idea? I can help you turn it into a production-ready product.",
@@ -135,8 +141,14 @@ export const translations = {
     about: {
       heading: "Hakkımda",
       greeting: "Merhaba, ben Birol Bulut",
-      description: "Yoğun iş süreçlerini anlaşılır adımlara dönüştüren React arayüzleri ve Java servisleri geliştiriyorum. Kullanışlı ayrıntılara, güvenilir veriye ve insanların gerçekten kullanabileceği ürünlere önem veriyorum.",
-      productThinking: "Ürün odaklı yaklaşım",
+      lead: "Yoğun iş süreçlerini",
+      leadAccent: "anlaşılır adımlara dönüştürüyorum.",
+      detail: "Bunun için React arayüzleri ve Java servisleri geliştiriyorum. Üç şeye önem veriyorum:",
+      values: [
+        { title: "Kullanışlı ayrıntılar", text: "Kullanan kişinin işini kısaltan küçük dokunuşlar." },
+        { title: "Güvenilir veri", text: "Doğru, tutarlı ve izlenebilir kayıtlar." },
+        { title: "Gerçekten kullanılan ürünler", text: "Demo için değil, her gün açılan araçlar." },
+      ],
       downloadCv: "CV'yi indir",
       ctaHeading: "Birlikte bir şeyler geliştirelim",
       ctaDescription: "Bir proje fikrin varsa onu çalışan bir ürüne dönüştürmene yardımcı olabilirim.",

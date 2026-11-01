@@ -33,18 +33,27 @@ export function About() {
   const text = copy.about;
 
   return (
-    <Reveal as="section" id="about" variants={stagger(0.1)} className="scroll-mt-28 py-20 md:py-32">
+    <Reveal as="section" id="about" variants={stagger(0.1)} className="scroll-mt-28 py-14 md:py-32">
       <SectionLabel index={1}>{text.heading}</SectionLabel>
 
       <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <motion.div variants={fadeUp}>
-          <p className="text-lg text-fog">{text.greeting}</p>
-          <p className="mt-4 text-2xl font-medium leading-[1.15] tracking-[-0.03em] text-white sm:text-3xl md:text-5xl">{text.description}</p>
-          <div className="mt-6 flex flex-wrap gap-2">
-            {["React", "Spring Boot", "PostgreSQL", text.productThinking].map((item) => (
-              <span key={item} className={chip}>{item}</span>
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-fog">{text.greeting}</p>
+          <p data-about-lead className="mt-5 text-[2rem] font-semibold leading-[1.05] tracking-[-0.04em] text-mute sm:text-5xl">
+            {text.lead} <span className="text-white">{text.leadAccent}</span>
+          </p>
+          <p data-about-detail className="mt-6 max-w-[46ch] leading-7 text-fog sm:text-lg">{text.detail}</p>
+          <ol className="mt-6 border-b border-white/[0.08]">
+            {text.values.map((value, index) => (
+              <li data-about-value key={value.title} className="grid grid-cols-[2rem_1fr] gap-x-3 border-t border-white/[0.08] py-4">
+                <span className="pt-1 font-mono text-xs text-mute">0{index + 1}</span>
+                <span>
+                  <span className="block font-medium text-white">{value.title}</span>
+                  <span className="mt-1 block text-sm leading-6 text-fog">{value.text}</span>
+                </span>
+              </li>
             ))}
-          </div>
+          </ol>
           <a
             href="/cv.pdf"
             download="Birol-Bulut-CV.pdf"

@@ -171,7 +171,7 @@ export default function Contact() {
     }`;
 
   return (
-    <Reveal as="section" id="contact" variants={stagger(0.1)} className="relative w-full scroll-mt-28 py-20 md:py-32">
+    <Reveal as="section" id="contact" variants={stagger(0.1)} className="relative w-full scroll-mt-28 py-14 md:py-32">
       <SectionLabel index={4}>{copy.nav.contact}</SectionLabel>
 
       <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">

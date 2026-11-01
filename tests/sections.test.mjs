@@ -86,6 +86,14 @@ test("about keeps CV download, contact CTA and stack as text", async () => {
   assert.doesNotMatch(html, /<img/);
 });
 
+test("about intro is split into a lead, a detail line and three values", async () => {
+  const html = await render("/src/sections/About.jsx", "About", {}, "tr");
+  assert.match(html, /data-about-lead/);
+  assert.match(html, /data-about-detail/);
+  assert.equal((html.match(/data-about-value/g) || []).length, 3);
+  assert.match(html, /Güvenilir veri/);
+});
+
 test("every project row has its own description and demo link", async () => {
   const html = await render("/src/sections/Projects.jsx", "default", {}, "en");
   assert.match(html, /Create short links, track clicks, and turn links off from your account\./);
