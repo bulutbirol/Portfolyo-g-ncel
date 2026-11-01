@@ -40,3 +40,17 @@ test("the app respects the user's reduced motion setting", async () => {
   const source = await import("node:fs/promises").then((fs) => fs.readFile("src/App.jsx", "utf8"));
   assert.match(source, /<MotionConfig reducedMotion="user">/);
 });
+
+test("hero keeps its actions and the full headline in markup", async () => {
+  const html = await render("/src/components/hero/Hero.jsx", "default", {}, "tr");
+  assert.match(html, /İşleri kolaylaştıran yazılımlar geliştiriyorum\./);
+  assert.match(html, /href="#projects"/);
+  assert.match(html, /github\.com\/bulutbirol/);
+  assert.match(html, /Spring Boot/);
+});
+
+test("marquee duplicate copy is hidden from screen readers", async () => {
+  const html = await render("/src/components/hero/Marquee.jsx", "default", { items: ["React"] });
+  assert.match(html, /aria-hidden="true"/);
+  assert.equal((html.match(/>React</g) || []).length, 2);
+});
