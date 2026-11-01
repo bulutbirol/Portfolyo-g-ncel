@@ -1,6 +1,9 @@
-import React, { useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "../LanguageContext";
+import { Reveal } from "../components/Reveal";
+import { SectionLabel } from "../components/SectionLabel";
+import { fadeUp, stagger } from "../motion";
 
 export function Work() {
   const ref = useRef(null);
@@ -9,11 +12,10 @@ export function Work() {
 
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start 0.85", "end 0.2"],
+    offset: ["start 0.85", "end 0.4"],
   });
 
   const lineScale = useTransform(scrollYProgress, [0, 1], [0, 1]);
-  const glowOpacity = useTransform(scrollYProgress, [0, 0.15, 1], [0, 1, 1]);
 
   const items = useMemo(
     () => [
@@ -47,100 +49,61 @@ export function Work() {
   );
 
   return (
-    <section id="work" className="relative scroll-mt-28 py-16 md:py-28">
-      <div className="mx-auto max-w-6xl px-1 sm:px-5">
-        <div className="mb-10 md:mb-14">
-          <h2 className="text-white text-3xl md:text-4xl font-semibold tracking-[-0.02em]">
-            {text.heading}
-          </h2>
-          <p className="mt-3 text-white/65 max-w-[62ch]">
-            {text.description}
-          </p>
-        </div>
+    <Reveal as="section" id="work" variants={stagger(0.1)} className="relative scroll-mt-28 py-20 md:py-32">
+      <SectionLabel index={3}>{copy.nav.work}</SectionLabel>
+      <motion.div variants={fadeUp} className="mb-14 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
+          {text.heading}
+          <span className="text-mute">.</span>
+        </h2>
+        <p className="max-w-sm text-fog">{text.description}</p>
+      </motion.div>
 
-        <div ref={ref} className="relative">
-          <div className="absolute left-[14px] top-0 bottom-0 w-[2px] bg-white/10 rounded-full" />
+      <div ref={ref} className="relative">
+        <div className="absolute bottom-0 left-0 top-0 w-px bg-white/[0.08] md:left-[200px]" />
+        <motion.div
+          style={{ scaleY: lineScale, transformOrigin: "top" }}
+          className="absolute bottom-0 left-0 top-0 w-px bg-white md:left-[200px]"
+        />
 
-          <motion.div
-            style={{ scaleY: lineScale, opacity: glowOpacity, transformOrigin: "top" }}
-            className="absolute left-[14px] top-0 bottom-0 w-[2px] rounded-full bg-white/70"
-          />
-
-          <motion.div
-            style={{ opacity: glowOpacity }}
-            className="absolute left-[14px] top-0 bottom-0 w-[14px] -translate-x-[6px] blur-xl bg-white/20"
-          />
-
-          <div className="space-y-8 md:space-y-10">
-            {items.map((it, idx) => (
-              <motion.div
-                key={`${it.company}-${it.period}-${idx}`}
-                initial={{ opacity: 0, y: 24, filter: "blur(8px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
-                transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                className="relative pl-12"
-              >
-                <div className="absolute left-0 top-6">
-                  <div className="h-7 w-7 rounded-full bg-zinc-950 border border-white/20 grid place-items-center">
-                    <div className="h-2.5 w-2.5 rounded-full bg-white/80" />
-                  </div>
-                </div>
-
-                <div className="workCard rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur-md px-6 py-5 md:px-7 md:py-6">
-                  <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
-                    <div>
-                      <div className="text-white text-xl md:text-2xl font-semibold tracking-[-0.015em]">
-                        {it.role}
-                      </div>
-                      <div className="mt-1 text-white/70">
-                        <span className="font-medium text-white/80">{it.company}</span>
-                        <span className="text-white/40"> · </span>
-                        <span className="text-white/60">{it.location}</span>
-                      </div>
-                    </div>
-
-                    <div className="text-white/55 text-sm md:text-base md:text-right">
-                      {it.period}
-                    </div>
-                  </div>
-
-                  <ul className="mt-4 space-y-2 text-white/70 leading-relaxed">
-                    {it.highlights.map((h, i) => (
-                      <motion.li
-                        key={`${it.company}-${i}`}
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{
-                          duration: 0.45,
-                          delay: 0.06 * i,
-                          ease: [0.22, 1, 0.36, 1],
-                        }}
-                        className="flex gap-3"
-                      >
-                        <span className="mt-[9px] h-[5px] w-[5px] rounded-full bg-white/55 shrink-0" />
-                        <span>{h}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {it.stack.map((s) => (
-                      <span
-                        key={`${it.company}-${s}`}
-                        className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-sm text-white/70"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+        <div className="space-y-16">
+          {items.map((it) => (
+            <Reveal
+              key={it.company}
+              variants={stagger(0.06)}
+              className="relative grid gap-4 pl-8 md:grid-cols-[200px_1fr] md:gap-0 md:pl-0"
+            >
+              <span className="absolute left-0 top-2 h-2 w-2 -translate-x-[3.5px] rounded-full bg-white md:left-[200px]" />
+              <motion.div variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.12em] text-mute md:pr-8 md:pt-1">
+                <p className="text-fog">{it.period}</p>
+                <p className="mt-2">{it.location}</p>
               </motion.div>
-            ))}
-          </div>
+
+              <div className="md:pl-12">
+                <motion.h3 variants={fadeUp} className="text-2xl font-medium tracking-[-0.03em] text-white md:text-4xl">
+                  {it.role}
+                </motion.h3>
+                <motion.p variants={fadeUp} className="mt-1 text-fog">{it.company}</motion.p>
+
+                <ul className="mt-6 space-y-3">
+                  {it.highlights.map((h) => (
+                    <motion.li key={h} variants={fadeUp} className="flex gap-3 leading-7 text-white/75">
+                      <span className="mt-3 h-px w-3 shrink-0 bg-white/30" />
+                      <span>{h}</span>
+                    </motion.li>
+                  ))}
+                </ul>
+
+                <motion.ul variants={fadeUp} className="mt-6 flex flex-wrap gap-2">
+                  {it.stack.map((s) => (
+                    <li key={s} className="rounded-full border border-white/10 px-3 py-1 text-xs text-fog">{s}</li>
+                  ))}
+                </motion.ul>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
-    </section>
+    </Reveal>
   );
 }

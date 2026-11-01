@@ -73,3 +73,25 @@ test("every project row has its own description and demo link", async () => {
   assert.match(html, /serviceflow-web-ten\.vercel\.app/);
   assert.match(html, /FSM-Platform-Project/);
 });
+
+test("contact labels are tied to their inputs", async () => {
+  const html = await render("/src/sections/Contact.jsx", "default", {}, "tr");
+  for (const id of ["contact-name", "contact-email", "contact-message"]) {
+    assert.match(html, new RegExp(`for="${id}"`));
+    assert.match(html, new RegExp(`id="${id}"`));
+  }
+});
+
+test("footer links have accessible names", async () => {
+  const html = await render("/src/sections/Footer.jsx", "default", {}, "en");
+  for (const name of ["GitHub", "LinkedIn", "Instagram"]) assert.match(html, new RegExp(`aria-label="${name}"`));
+  assert.match(html, /href="\/cv\.pdf"/);
+});
+
+test("work shows both roles under a numbered label", async () => {
+  const html = await render("/src/sections/Work.jsx", "Work", {}, "en");
+  assert.match(html, /03 · Work</);
+  assert.match(html, /Work Experience/);
+  assert.match(html, /Workintech/);
+  assert.match(html, /BBROZ/);
+});

@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { motion } from "framer-motion";
+import { FiArrowRight } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
+import { Reveal } from "../components/Reveal";
+import { SectionLabel } from "../components/SectionLabel";
+import { fadeUp, stagger } from "../motion";
 
 export default function Contact() {
   const { language, copy } = useLanguage();
@@ -102,111 +107,82 @@ export default function Contact() {
     }
   };
 
+  const field = (name) =>
+    `w-full border-0 border-b bg-transparent px-0 py-3 text-lg text-white placeholder:text-mute outline-none transition-colors duration-300 focus:ring-0 ${
+      errors[name] ? "border-red-400/70 focus:border-red-400" : "border-white/15 focus:border-white"
+    }`;
+
   return (
-    <section id="contact" className="relative w-full scroll-mt-28 overflow-hidden py-16 md:py-24">
+    <Reveal as="section" id="contact" variants={stagger(0.1)} className="relative w-full scroll-mt-28 py-20 md:py-32">
+      <SectionLabel index={4}>{copy.nav.contact}</SectionLabel>
 
-      <div className="relative z-10 flex justify-center px-0 sm:px-6">
-        <div className="w-full max-w-3xl">
-          <h2 className="text-4xl md:text-5xl font-semibold text-white mb-10 text-center">
-            {text.heading}
-          </h2>
+      <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:gap-20">
+        <motion.h2 variants={fadeUp} className="text-5xl font-semibold leading-[0.95] tracking-[-0.05em] text-white md:text-7xl">
+          {text.heading}
+          <span className="text-mute">.</span>
+        </motion.h2>
 
-          <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-[0_24px_80px_rgba(0,0,0,0.45)] p-5 sm:p-8 md:p-10">
-            <form onSubmit={onSubmit} className="space-y-6">
-              <div>
-                <label className="block text-sm text-white/70 mb-2">{text.fullName}</label>
-                <input
-                  type="text"
-                  name="fullName"
-                  value={form.fullName}
-                  onChange={onChange}
-                  placeholder="Birol Bulut"
-                  required
-                  className={`w-full rounded-xl border ${
-                    errors.fullName ? "border-red-500/70" : "border-white/10"
-                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
-                />
-                {errors.fullName && (
-                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.fullName]}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm text-white/70 mb-2">{text.email}</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={onChange}
-                  placeholder="birolblood@gmail.com"
-                  required
-                  className={`w-full rounded-xl border ${
-                    errors.email ? "border-red-500/70" : "border-white/10"
-                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
-                />
-                {errors.email && (
-                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.email]}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm text-white/70 mb-2">{text.message}</label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={onChange}
-                  rows={4}
-                  placeholder={text.messagePlaceholder}
-                  required
-                  className={`w-full resize-y min-h-[110px] max-h-[260px] rounded-xl border ${
-                    errors.message ? "border-red-500/70" : "border-white/10"
-                  } bg-white/5 px-4 py-3 text-white placeholder:text-white/35 outline-none transition focus:ring-2 focus:ring-purple-500/70`}
-                />
-                {errors.message && (
-                  <p className="mt-2 text-xs text-red-400">{text.errors[errors.message]}</p>
-                )}
-              </div>
-
-              <button
-                type="submit"
-                disabled={isSending}
-                className={`group relative w-full overflow-hidden rounded-xl 
-                           bg-white/5 backdrop-blur-xl 
-                           px-4 py-3.5 font-medium text-white/85 
-                           transition-all duration-300
-                           hover:bg-white/10 
-                           border border-transparent hover:border-white/20
-                           shadow-[0_14px_40px_rgba(0,0,0,0.35)]
-                           active:scale-[0.99]
-                           ${isSending ? "opacity-60 cursor-not-allowed" : ""}`}
-              >
-                <span className="relative z-10 flex items-center justify-center">
-                  <span className="transition-all duration-300 group-hover:opacity-0">
-                    {isSending ? text.sending : text.send}
-                  </span>
-
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    strokeWidth="1.8"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="absolute h-5 w-5 stroke-white/90 
-                               opacity-0 translate-x-[-20px] translate-y-[12px]
-                               transition-all duration-300
-                               group-hover:opacity-100 
-                               group-hover:translate-x-0 
-                               group-hover:translate-y-0"
-                  >
-                    <path d="M22 2 11 13" />
-                    <path d="M22 2 15 22 11 13 2 9 22 2Z" />
-                  </svg>
-                </span>
-              </button>
-            </form>
+        <motion.form variants={fadeUp} onSubmit={onSubmit} className="space-y-8">
+          <div>
+            <label htmlFor="contact-name" className="block font-mono text-xs uppercase tracking-[0.15em] text-fog">{text.fullName}</label>
+            <input
+              id="contact-name"
+              type="text"
+              name="fullName"
+              value={form.fullName}
+              onChange={onChange}
+              placeholder="Birol Bulut"
+              required
+              aria-invalid={errors.fullName ? true : undefined}
+              className={field("fullName")}
+            />
+            {errors.fullName && <p className="mt-2 text-xs text-red-400">{text.errors[errors.fullName]}</p>}
           </div>
-        </div>
+
+          <div>
+            <label htmlFor="contact-email" className="block font-mono text-xs uppercase tracking-[0.15em] text-fog">{text.email}</label>
+            <input
+              id="contact-email"
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={onChange}
+              placeholder="birolblood@gmail.com"
+              required
+              aria-invalid={errors.email ? true : undefined}
+              className={field("email")}
+            />
+            {errors.email && <p className="mt-2 text-xs text-red-400">{text.errors[errors.email]}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="contact-message" className="block font-mono text-xs uppercase tracking-[0.15em] text-fog">{text.message}</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              value={form.message}
+              onChange={onChange}
+              rows={4}
+              placeholder={text.messagePlaceholder}
+              required
+              aria-invalid={errors.message ? true : undefined}
+              className={`${field("message")} min-h-[120px] max-h-[260px] resize-y`}
+            />
+            {errors.message && <p className="mt-2 text-xs text-red-400">{text.errors[errors.message]}</p>}
+          </div>
+
+          <button
+            type="submit"
+            disabled={isSending}
+            className={`group inline-flex items-center gap-3 rounded-full bg-white px-6 py-3.5 text-sm font-medium text-ink transition hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white active:scale-[0.98] ${
+              isSending ? "cursor-not-allowed opacity-60" : ""
+            }`}
+          >
+            {isSending ? text.sending : text.send}
+            <FiArrowRight aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1" />
+          </button>
+        </motion.form>
       </div>
-    </section>
+    </Reveal>
   );
 }
