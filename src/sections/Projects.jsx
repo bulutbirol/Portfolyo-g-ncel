@@ -140,7 +140,7 @@ export default function Projects() {
               <h3 className="text-2xl font-medium tracking-[-0.03em] text-white/80 transition duration-500 group-focus-within:translate-x-2 group-focus-within:text-white group-hover:translate-x-2 group-hover:text-white motion-reduce:transform-none md:text-4xl">
                 {project.title}
               </h3>
-              <div className="grid transition-[grid-template-rows] duration-500 md:grid-rows-[0fr] md:group-focus-within:grid-rows-[1fr] md:group-hover:grid-rows-[1fr]">
+              <div className="grid transition-[grid-template-rows] duration-500 [@media(hover:hover)_and_(min-width:768px)]:grid-rows-[0fr] md:group-focus-within:grid-rows-[1fr] md:group-hover:grid-rows-[1fr]">
                 <div className="overflow-hidden">
                   <p className="pt-3 text-sm leading-6 text-fog md:max-w-xl">{text.descriptions[project.id]}</p>
                   <p className="pt-3 font-mono text-[11px] uppercase tracking-[0.15em] text-mute">{project.stack.join(" / ")}</p>

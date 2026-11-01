@@ -75,6 +75,12 @@ test("every project row has its own description and demo link", async () => {
   assert.match(html, /FSM-Platform-Project/);
 });
 
+test("project descriptions only collapse on devices that can hover", async () => {
+  const html = await render("/src/sections/Projects.jsx", "default", {}, "en");
+  assert.match(html, /\[@media\(hover:hover\)_and_\(min-width:768px\)\]:grid-rows-\[0fr\]/);
+  assert.doesNotMatch(html, /md:grid-rows-\[0fr\]/);
+});
+
 test("contact labels are tied to their inputs", async () => {
   const html = await render("/src/sections/Contact.jsx", "default", {}, "tr");
   for (const id of ["contact-name", "contact-email", "contact-message"]) {
