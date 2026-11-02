@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { FiArrowUpRight, FiGithub } from "react-icons/fi";
+import { FiArrowUpRight, FiGithub, FiPlus } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
 import { SectionLabel } from "../components/SectionLabel";
@@ -51,10 +52,10 @@ function ProjectLinks({ title, live, source, prominent = false }) {
   const text = copy.projects;
   const liveClass = prominent
     ? `group/link inline-flex items-center gap-2 rounded-full bg-white px-4 py-2.5 text-sm font-medium text-ink transition hover:bg-white/85 sm:px-5 sm:py-3 ${focusRing}`
-    : `group/link inline-flex items-center gap-1.5 text-sm text-white transition hover:text-fog ${focusRing}`;
+    : `group/link inline-flex items-center gap-1.5 py-2 text-sm text-white md:py-0 transition hover:text-fog ${focusRing}`;
   const sourceClass = prominent
     ? `inline-flex items-center gap-2 rounded-full border border-white/15 px-4 py-2.5 text-sm font-medium text-white transition hover:border-white/40 sm:px-5 sm:py-3 ${focusRing}`
-    : `inline-flex items-center gap-1.5 text-sm text-fog transition hover:text-white ${focusRing}`;
+    : `inline-flex items-center gap-1.5 py-2 text-sm text-fog md:py-0 transition hover:text-white ${focusRing}`;
 
   return (
     <div className="flex flex-wrap items-center gap-x-3 gap-y-3 sm:gap-x-5">
@@ -74,6 +75,7 @@ function ProjectLinks({ title, live, source, prominent = false }) {
 export default function Projects() {
   const { copy } = useLanguage();
   const text = copy.projects;
+  const [openId, setOpenId] = useState(null);
 
   return (
     <Reveal as="section" id="projects" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-32">
@@ -105,7 +107,7 @@ export default function Projects() {
         </div>
 
         <div aria-hidden="true" className="rounded-2xl border border-white/[0.08] bg-ink p-4 sm:p-6">
-          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 font-mono text-[11px] tracking-[0.15em]">
+          <div className="flex items-center justify-between border-b border-white/[0.08] pb-4 font-mono text-[0.6875rem] tracking-[0.15em]">
             <span className="text-mute">{text.workflowLabel}</span>
             <span className="flex items-center gap-2 text-emerald-400">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" /> {text.live}
@@ -118,15 +120,27 @@ export default function Projects() {
                 <span className="font-mono text-xs text-mute">0{index + 1}</span>
                 <span className="flex-1 text-sm text-white/85">{step}</span>
                 {index === text.steps.length - 1 ? (
-                  <span className="font-mono text-[11px] text-emerald-400">{text.done}</span>
+                  <span className="font-mono text-[0.6875rem] text-emerald-400">{text.done}</span>
                 ) : (
                   <span className="h-px w-6 bg-white/20" />
                 )}
               </motion.li>
             ))}
           </motion.ol>
-          <p className="mt-5 font-mono text-[11px] uppercase tracking-[0.15em] text-mute">{text.roles.join(" · ")}</p>
+          <p className="mt-5 font-mono text-[0.6875rem] uppercase tracking-[0.15em] text-mute">{text.roles.join(" · ")}</p>
         </div>
+
+        <figure className="overflow-hidden rounded-2xl border border-white/[0.08] lg:col-span-2">
+          <img
+            src="/projects/serviceflow.jpg"
+            alt={text.serviceFlowShotAlt}
+            width="1568"
+            height="772"
+            loading="lazy"
+            decoding="async"
+            className="block h-auto w-full"
+          />
+        </figure>
       </Spotlight>
 
       <motion.ul variants={stagger(0.06)} className="mt-6 border-b border-white/[0.08]">
@@ -139,13 +153,35 @@ export default function Projects() {
           >
             <span className="pt-1 font-mono text-xs text-mute md:pt-3">{String(index + 1).padStart(2, "0")}</span>
             <div className="min-w-0">
-              <h3 className="text-2xl font-medium tracking-[-0.03em] text-white/80 transition duration-500 group-focus-within:translate-x-2 group-focus-within:text-white group-hover:translate-x-2 group-hover:text-white md:text-4xl">
-                {project.title}
+              <h3 className="text-2xl font-medium tracking-[-0.03em] text-white/80 transition duration-500 group-has-[:focus-visible]:translate-x-2 group-has-[:focus-visible]:text-white group-hover:translate-x-2 group-hover:text-white md:text-4xl">
+                <button
+                  type="button"
+                  aria-expanded={openId === project.id}
+                  onClick={() => setOpenId(openId === project.id ? null : project.id)}
+                  className="flex w-full items-center justify-between gap-4 text-left"
+                >
+                  {project.title}
+                  <FiPlus
+                    aria-hidden="true"
+                    className={`shrink-0 text-fog transition-transform duration-300 md:hidden ${openId === project.id ? "rotate-45" : ""}`}
+                  />
+                </button>
               </h3>
-              <div className="grid transition-[grid-template-rows] duration-500 [@media(hover:hover)_and_(min-width:768px)]:grid-rows-[0fr] md:group-focus-within:grid-rows-[1fr] md:group-hover:grid-rows-[1fr]">
+              <div
+                className={`grid transition-[grid-template-rows] duration-500 md:group-has-[:focus-visible]:grid-rows-[1fr] md:group-hover:grid-rows-[1fr] ${openId === project.id ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+              >
                 <div className="overflow-hidden">
                   <p className="pt-3 text-sm leading-6 text-fog md:max-w-xl">{text.descriptions[project.id]}</p>
-                  <p className="pt-3 font-mono text-[11px] uppercase tracking-[0.15em] text-mute">{project.stack.join(" / ")}</p>
+                  <p className="pt-3 font-mono text-[0.6875rem] uppercase tracking-[0.15em] text-mute">{project.stack.join(" / ")}</p>
+                  <img
+                    src={`/projects/${project.id}.jpg`}
+                    alt={text.shotAlt.replace("{title}", project.title)}
+                    width="776"
+                    height="386"
+                    loading="lazy"
+                    decoding="async"
+                    className="mt-4 h-auto w-full max-w-md rounded-xl border border-white/[0.08]"
+                  />
                 </div>
               </div>
             </div>

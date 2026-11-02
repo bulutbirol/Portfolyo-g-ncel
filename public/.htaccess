@@ -4,6 +4,8 @@ RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\. [NC]
 RewriteRule ^ https://birolweb.dev%{REQUEST_URI} [L,R=301]
 
+ErrorDocument 404 /404.html
+
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresDefault "access plus 7 days"

@@ -8,7 +8,7 @@ export function Backdrop() {
           className="h-full w-full animate-[spin_90s_linear_infinite] rounded-full blur-3xl will-change-transform"
           style={{
             background:
-              "conic-gradient(from 0deg, transparent 0deg, rgba(56,189,248,0.26) 50deg, transparent 110deg, rgba(167,139,250,0.22) 170deg, transparent 230deg, rgba(255,255,255,0.1) 290deg, transparent 360deg)",
+              "conic-gradient(from 0deg, transparent 0deg, rgba(255,255,255,0.12) 50deg, transparent 110deg, rgba(255,255,255,0.06) 170deg, transparent 230deg, rgba(255,255,255,0.1) 290deg, transparent 360deg)",
           }}
         />
       </div>

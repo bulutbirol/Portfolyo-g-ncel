@@ -5,7 +5,7 @@ export default {
       colors: {
         ink: "#07080c",
         fog: "#9aa0ae",
-        mute: "#5b6070",
+        mute: "#7a8090",
       },
       keyframes: {
         marquee: {

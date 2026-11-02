@@ -87,7 +87,7 @@ export function Work() {
 
                 <ul className="mt-6 space-y-3">
                   {it.highlights.map((h) => (
-                    <motion.li key={h} variants={fadeUp} className="flex gap-3 text-[15px] leading-7 text-white/75 sm:text-base">
+                    <motion.li key={h} variants={fadeUp} className="flex gap-3 text-[0.9375rem] leading-7 text-white/75 sm:text-base">
                       <span className="mt-3 h-px w-3 shrink-0 bg-white/30" />
                       <span>{h}</span>
                     </motion.li>

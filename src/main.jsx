@@ -15,3 +15,12 @@ const app = (
 
 if (container.hasChildNodes()) hydrateRoot(container, app)
 else createRoot(container).render(app)
+
+const beaconToken = import.meta.env.VITE_CF_BEACON_TOKEN
+if (beaconToken && !import.meta.env.DEV) {
+  const script = document.createElement('script')
+  script.defer = true
+  script.src = 'https://static.cloudflareinsights.com/beacon.min.js'
+  script.dataset.cfBeacon = JSON.stringify({ token: beaconToken })
+  document.head.appendChild(script)
+}

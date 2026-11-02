@@ -7,6 +7,13 @@
     background-color: #07080c;
   }
 
+  /* phones: every rem-based size and space scales up together */
+  @media (max-width: 767px) {
+    html {
+      font-size: 112.5%;
+    }
+  }
+
   html,
   body,
   #root {

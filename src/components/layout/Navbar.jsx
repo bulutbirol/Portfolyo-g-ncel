@@ -91,7 +91,7 @@ export function Navbar() {
             ))}
           </nav>
 
-          <div role="group" aria-label={text.language} className="flex items-center rounded-full border border-white/10 p-0.5 font-mono text-[11px]">
+          <div role="group" aria-label={text.language} className="flex items-center rounded-full border border-white/10 p-0.5 font-mono text-[0.6875rem]">
             {["en", "tr"].map((option) => (
               <button
                 key={option}
