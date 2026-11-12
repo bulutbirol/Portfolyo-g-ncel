@@ -88,7 +88,7 @@ export const translations = {
         {
           role: "Front-End Developer",
           period: "Feb 2022 — Present",
-          location: "Bursa, Türkiye · In-site",
+          location: "Bursa, Türkiye · On-site",
           highlights: [
             "Building responsive and performance-oriented user interfaces.",
             "Developing reusable component-based UI architectures.",
