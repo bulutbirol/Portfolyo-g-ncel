@@ -84,7 +84,7 @@ export function Navbar() {
                   <motion.span
                     layoutId="nav-underline"
                     transition={{ duration: 0.45, ease }}
-                    className="absolute inset-x-3 -bottom-px h-px bg-white"
+                    className="absolute inset-x-3 -bottom-px h-px bg-ember"
                   />
                 )}
               </a>
@@ -103,7 +103,7 @@ export function Navbar() {
                   language === option ? "text-ink" : "text-fog hover:text-white"
                 }`}
               >
-                {language === option && <span className="absolute inset-0 rounded-full bg-white" />}
+                {language === option && <span className="absolute inset-0 rounded-full bg-ember" />}
                 <span className="relative">{option.toUpperCase()}</span>
               </button>
             ))}
@@ -138,7 +138,7 @@ export function Navbar() {
         data-scroll-progress
         aria-hidden="true"
         style={{ scaleX: progress }}
-        className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-white/0 via-white/70 to-white"
+        className="absolute inset-x-0 bottom-0 h-px origin-left bg-gradient-to-r from-ember/0 via-ember/70 to-ember"
       />
 
       <AnimatePresence>
@@ -161,7 +161,6 @@ export function Navbar() {
                 transition={{ duration: 0.4, ease, delay: 0.04 * index }}
                 className="flex items-baseline gap-4 border-b border-white/[0.06] py-4 text-2xl tracking-tight text-white"
               >
-                <span className="font-mono text-xs text-mute">0{index + 1}</span>
                 {text[id]}
               </motion.a>
             ))}

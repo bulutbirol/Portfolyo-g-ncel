@@ -4,7 +4,7 @@ export default function Marquee({ items }) {
       {items.map((item) => (
         <li key={item} className="flex items-center gap-10 whitespace-nowrap">
           <span>{item}</span>
-          <span aria-hidden="true" className="h-1 w-1 rounded-full bg-white/20" />
+          <span aria-hidden="true" className="h-1 w-1 rounded-full bg-ember/60" />
         </li>
       ))}
     </ul>
@@ -12,7 +12,7 @@ export default function Marquee({ items }) {
 
   return (
     <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
-      <div className="flex w-max animate-marquee font-mono text-xs uppercase tracking-[0.2em] text-mute hover:[animation-play-state:paused]">
+      <div className="flex w-max animate-marquee text-lg font-medium tracking-[-0.01em] text-mute hover:[animation-play-state:paused]">
         {row(false)}
         {row(true)}
       </div>

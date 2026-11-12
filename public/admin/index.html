@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<title>Burada ne arıyorsun?</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<style>
+  :root { color-scheme: dark; --ink:#07080c; --fog:#9aa0ae; --ember:#ff6a2b; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--ink); color:#fff; font:16px/1.6 ui-sans-serif,system-ui,sans-serif; }
+  main { max-width:44rem; margin:0 auto; padding:4rem 1rem 5rem; }
+  h1 { font-size:clamp(2rem,6vw,3rem); letter-spacing:-.04em; line-height:1.05; margin:0 0 1rem; }
+  h1 span { color:var(--ember); }
+  .joke { color:var(--fog); max-width:52ch; margin:0 0 3rem; }
+  .cards { display:grid; grid-template-columns:1fr 1fr; gap:.75rem; }
+  .card { border:1px solid rgba(255,255,255,.1); border-radius:1rem; padding:1.25rem; }
+  .card b { display:block; font-size:2.75rem; line-height:1; letter-spacing:-.04em; font-variant-numeric:tabular-nums; }
+  .card small { color:var(--fog); }
+  h2 { font-size:.8rem; font-weight:500; color:var(--fog); text-transform:uppercase; letter-spacing:.15em; margin:2.5rem 0 1rem; }
+  .bars { display:flex; align-items:flex-end; gap:3px; height:8rem; }
+  .bar { flex:1; min-height:2px; background:var(--ember); border-radius:2px 2px 0 0; opacity:.85; }
+  .bar.zero { background:rgba(255,255,255,.12); }
+  .axis { display:flex; justify-content:space-between; color:var(--fog); font-size:.75rem; margin-top:.5rem; }
+  .foot { color:var(--fog); font-size:.85rem; margin-top:3rem; }
+  .foot a { color:var(--ember); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Burada ne arıyorsun<span>?</span></h1>
+  <p class="joke">Portfolyo sitem için bir yönetim paneline ihtiyaç duymadım. Merak ettiğim için topladığım istatistikler burada, sen de görebilirsin.</p>
+
+  <div class="cards">
+    <div class="card"><b id="visits">–</b><small>ziyaret</small></div>
+    <div class="card"><b id="cv">–</b><small>CV indirme</small></div>
+  </div>
+
+  <h2>Son 30 gün · ziyaret</h2>
+  <div class="bars" id="bars" aria-hidden="true"></div>
+  <div class="axis"><span id="from"></span><span id="to"></span></div>
+
+  <p class="foot">Sadece zaman ve olay türü tutuluyor: IP, çerez, cihaz bilgisi yok. <a href="/">Siteye dön</a></p>
+</main>
+<script>
+fetch("/api/track.php").then(function (r) { return r.json(); }).then(function (d) {
+  document.getElementById("visits").textContent = d.visits;
+  document.getElementById("cv").textContent = d.cv;
+  var days = Object.keys(d.days), max = Math.max.apply(null, days.map(function (k) { return d.days[k].visit; }).concat(1));
+  document.getElementById("bars").innerHTML = days.map(function (k) {
+    var v = d.days[k].visit;
+    return '<div class="bar' + (v ? "" : " zero") + '" title="' + k + ': ' + v + '" style="height:' + Math.max(v / max * 100, 2) + '%"></div>';
+  }).join("");
+  document.getElementById("from").textContent = days[0];
+  document.getElementById("to").textContent = days[days.length - 1];
+}).catch(function () {
+  document.querySelector(".joke").textContent += " (Şu an rakamlara ulaşamadım, sonra tekrar dene.)";
+});
+</script>
+</body>
+</html>

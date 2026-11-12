@@ -1,0 +1,3 @@
+<FilesMatch "^(track\.log|track\.config\.php)$">
+  Require all denied
+</FilesMatch>

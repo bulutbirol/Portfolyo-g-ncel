@@ -78,7 +78,7 @@ test("marquee duplicate copy is hidden from screen readers", async () => {
 
 test("about keeps CV download, contact CTA and stack as text", async () => {
   const html = await render("/src/sections/About.jsx", "About", {}, "en");
-  assert.match(html, /01 · About Me/);
+  assert.match(html, /About Me/);
   assert.match(html, /href="\/cv\.pdf"/);
   assert.match(html, /download="Birol-Bulut-CV\.pdf"/);
   assert.match(html, /href="#contact"/);
@@ -103,17 +103,20 @@ test("every project row has its own description and demo link", async () => {
   assert.match(html, /FSM-Platform-Project/);
 });
 
-test("project descriptions only collapse on devices that can hover", async () => {
+test("project screenshots stay visible in every row and the ServiceFlow scene renders", async () => {
   const html = await render("/src/sections/Projects.jsx", "default", {}, "en");
-  assert.match(html, /\[@media\(hover:hover\)_and_\(min-width:768px\)\]:grid-rows-\[0fr\]/);
-  assert.doesNotMatch(html, /md:grid-rows-\[0fr\]/);
+  assert.match(html, /data-project-scene/);
+  assert.equal((html.match(/src="\/projects\/[a-z]+\.jpg"/g) || []).length, 6);
+  assert.doesNotMatch(html, /grid-rows-\[0fr\]/);
 });
 
 test("contact labels are tied to their inputs", async () => {
-  const html = await render("/src/sections/Contact.jsx", "default", {}, "tr");
+  // Inputs live on later steps, so they are not in the first-render markup.
+  const fs = await import("node:fs/promises");
+  const src = await fs.readFile("src/sections/Contact.jsx", "utf8");
   for (const id of ["contact-name", "contact-email", "contact-message"]) {
-    assert.match(html, new RegExp(`for="${id}"`));
-    assert.match(html, new RegExp(`id="${id}"`));
+    assert.match(src, new RegExp(`htmlFor="${id}"`));
+    assert.match(src, new RegExp(`id="${id}"`));
   }
 });
 
@@ -123,9 +126,8 @@ test("footer links have accessible names", async () => {
   assert.match(html, /href="\/cv\.pdf"/);
 });
 
-test("work shows both roles under a numbered label", async () => {
+test("work shows both roles under its heading", async () => {
   const html = await render("/src/sections/Work.jsx", "Work", {}, "en");
-  assert.match(html, /03 · Work</);
   assert.match(html, /Work Experience/);
   assert.match(html, /Workintech/);
   assert.match(html, /BBROZ/);
@@ -142,10 +144,20 @@ test("heading suffix stays on the last word", async () => {
 });
 
 test("contact form includes the Turnstile check", async () => {
-  const html = await render("/src/sections/Contact.jsx", "default", {}, "en");
-  assert.match(html, /data-turnstile/);
-  assert.match(html, /data-sitekey="0x4AAAAAAFuy4JdzQ8rs0DcX"/);
+  // The widget renders on the last step, so check that the send path still requires a token.
+  const fs = await import("node:fs/promises");
+  const src = await fs.readFile("src/sections/Contact.jsx", "utf8");
+  assert.match(src, /turnstile\.render\(captchaRef\.current/);
+  assert.match(src, /turnstileToken: token/);
   const { translations } = await vite.ssrLoadModule("/src/i18n.js");
   assert.ok(translations.en.contact.errors.captcha);
   assert.ok(translations.tr.contact.errors.captcha);
+});
+
+test("contact starts as a step-by-step form", async () => {
+  const html = await render("/src/sections/Contact.jsx", "default", {}, "en");
+  assert.match(html, /What can I help you with\?/);
+  assert.match(html, /role="checkbox"/);
+  assert.match(html, /Job opportunity/);
+  assert.doesNotMatch(html, /birolblood@gmail\.com/);
 });

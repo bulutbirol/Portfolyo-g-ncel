@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import { FiArrowDown, FiArrowUpRight } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
-import { SectionLabel } from "../components/SectionLabel";
+import { SplitText } from "../components/SplitText";
 import { Spotlight } from "../components/Spotlight";
 import { fadeUp, stagger } from "../motion";
+import { track } from "../track";
 
 const STACK = [
   "React",
@@ -33,20 +34,21 @@ export function About() {
   const text = copy.about;
 
   return (
-    <Reveal as="section" id="about" variants={stagger(0.1)} className="scroll-mt-28 py-14 md:py-32">
-      <SectionLabel index={1}>{text.heading}</SectionLabel>
+    <Reveal as="section" id="about" variants={stagger(0.1)} className="scroll-mt-28 py-14 md:py-28">
+      <motion.h2 variants={fadeUp} className="mb-12 text-5xl font-semibold tracking-[-0.04em] text-white md:mb-16 md:text-7xl">
+        <SplitText text={text.heading} after={<span className="text-ember">.</span>} />
+      </motion.h2>
 
       <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:gap-16">
         <motion.div variants={fadeUp}>
-          <p className="font-mono text-xs uppercase tracking-[0.2em] text-fog">{text.greeting}</p>
-          <p data-about-lead className="mt-5 text-[2rem] font-semibold leading-[1.05] tracking-[-0.04em] text-mute sm:text-5xl">
-            {text.lead} <span className="text-white">{text.leadAccent}</span>
+          <p data-about-lead className="text-[2rem] font-semibold leading-[1.05] tracking-[-0.04em] text-mute sm:text-5xl">
+            {text.lead} <span className="text-ember">{text.leadAccent}</span>
           </p>
-          <p data-about-detail className="mt-6 max-w-[46ch] leading-7 text-fog sm:text-lg">{text.detail}</p>
+          <p data-about-detail className="mt-6 max-w-[46ch] leading-[1.75] text-fog sm:text-lg">{text.detail}</p>
           <ol className="mt-6 border-b border-white/[0.08]">
             {text.values.map((value, index) => (
               <li data-about-value key={value.title} className="grid grid-cols-[2rem_1fr] gap-x-3 border-t border-white/[0.08] py-4">
-                <span className="pt-1 font-mono text-xs text-mute">0{index + 1}</span>
+                <span className="pt-1 text-sm font-medium tabular-nums text-ember">0{index + 1}</span>
                 <span>
                   <span className="block font-medium text-white">{value.title}</span>
                   <span className="mt-1 block text-sm leading-6 text-fog">{value.text}</span>
@@ -57,7 +59,8 @@ export function About() {
           <a
             href="/cv.pdf"
             download="Birol-Bulut-CV.pdf"
-            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-white/85"
+            onClick={() => track("cv")}
+            className="group mt-10 inline-flex items-center gap-2 rounded-full bg-ember px-5 py-3 text-sm font-medium text-ink transition hover:bg-ember/85"
           >
             {text.downloadCv}
             <FiArrowDown aria-hidden="true" className="transition-transform duration-300 group-hover:translate-y-0.5" />
@@ -78,7 +81,7 @@ export function About() {
           <Spotlight variants={fadeUp} className={tile}>
             <h3 className="font-medium text-white">{text.location}</h3>
             <p className="mt-2 text-sm leading-6 text-fog">{text.locationDescription}</p>
-            <p className="mt-4 font-mono text-xs text-mute">Bursa · UTC+3</p>
+            <p className="mt-4 text-sm tabular-nums text-mute">Bursa · UTC+3</p>
           </Spotlight>
 
           <Spotlight variants={fadeUp} className={`${tile} sm:col-span-2`}>

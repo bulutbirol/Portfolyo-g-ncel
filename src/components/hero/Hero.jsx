@@ -29,21 +29,13 @@ export default function Hero() {
       />
 
       <motion.div initial="hidden" animate="show" variants={stagger(0.12)} style={{ y, opacity }}>
-        <motion.p variants={fadeUp} className="mb-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] text-fog">
-          <span className="relative flex h-2 w-2">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-          </span>
-          {text.greeting}
-        </motion.p>
-
-        <h1 className="max-w-[14ch] text-[clamp(2.6rem,9vw,7rem)] font-semibold leading-[0.95] tracking-[-0.05em] text-white">
+        <h1 className="max-w-[15ch] text-[clamp(2.75rem,10vw,6rem)] font-semibold leading-[0.96] tracking-[-0.04em] text-white">
           <span className="sr-only">{`${text.title} ${text.titleAccent}`}</span>
           <motion.span aria-hidden="true" variants={stagger(0.06)} className="block">
             {words.map(({ w, accent }, i) => (
               <Fragment key={`${w}-${i}`}>
                 <span className="inline-block overflow-hidden pb-[0.08em] align-bottom">
-                  <motion.span variants={word} className={`inline-block ${accent ? "text-mute" : ""}`}>
+                  <motion.span variants={word} className={`inline-block ${accent ? "text-ember" : ""}`}>
                     {w}
                   </motion.span>
                 </span>
@@ -54,11 +46,20 @@ export default function Hero() {
         </h1>
 
         <motion.div variants={fadeUp} className="mt-10 flex flex-col gap-8 border-t border-white/[0.08] pt-8 md:flex-row md:items-end md:justify-between">
-          <p className="max-w-[52ch] text-base leading-7 text-fog sm:text-lg sm:leading-8">{text.description}</p>
+          <div className="max-w-[52ch]">
+            <p className="flex items-center gap-3 text-xl font-medium tracking-[-0.02em] text-white">
+              <span className="relative flex h-2.5 w-2.5">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
+                <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-emerald-400" />
+              </span>
+              {text.greeting}
+            </p>
+            <p className="mt-4 text-base leading-[1.75] text-fog sm:text-lg sm:leading-[1.8]">{text.description}</p>
+          </div>
           <div className="flex shrink-0 flex-wrap gap-3">
             <a
               href="#projects"
-              className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-medium text-ink transition hover:bg-white/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+              className="group inline-flex items-center gap-2 rounded-full bg-ember px-5 py-3 text-sm font-medium text-ink transition hover:bg-ember/85 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
             >
               {text.explore}
               <FiArrowDownRight aria-hidden="true" className="transition-transform duration-300 group-hover:rotate-[-45deg]" />
@@ -102,7 +103,7 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }} className="mt-16 md:mt-24">
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 1 }} className="mt-20 md:mt-28">
         <Marquee items={STACK} />
       </motion.div>
     </section>

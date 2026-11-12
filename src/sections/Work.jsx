@@ -2,7 +2,6 @@ import { useMemo, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useLanguage } from "../LanguageContext";
 import { Reveal } from "../components/Reveal";
-import { SectionLabel } from "../components/SectionLabel";
 import { SplitText } from "../components/SplitText";
 import { fadeUp, stagger } from "../motion";
 
@@ -50,11 +49,10 @@ export function Work() {
   );
 
   return (
-    <Reveal as="section" id="work" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-32">
-      <SectionLabel index={3}>{copy.nav.work}</SectionLabel>
+    <Reveal as="section" id="work" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-28">
       <motion.div variants={fadeUp} className="mb-10 flex flex-col gap-4 md:mb-14 md:flex-row md:items-end md:justify-between">
-        <h2 className="text-5xl font-semibold tracking-[-0.05em] text-white md:text-7xl">
-          <SplitText text={text.heading} after={<span className="text-mute">.</span>} />
+        <h2 className="text-5xl font-semibold tracking-[-0.04em] text-white md:text-7xl">
+          <SplitText text={text.heading} after={<span className="text-ember">.</span>} />
         </h2>
         <p className="max-w-sm text-fog">{text.description}</p>
       </motion.div>
@@ -63,7 +61,7 @@ export function Work() {
         <div className="absolute bottom-0 left-0 top-0 w-px bg-white/[0.08] md:left-[200px]" />
         <motion.div
           style={{ scaleY: lineScale, transformOrigin: "top" }}
-          className="absolute bottom-0 left-0 top-0 w-px bg-white md:left-[200px]"
+          className="absolute bottom-0 left-0 top-0 w-px bg-ember md:left-[200px]"
         />
 
         <div className="space-y-12 md:space-y-16">
@@ -73,8 +71,8 @@ export function Work() {
               variants={stagger(0.06)}
               className="relative grid gap-4 pl-8 md:grid-cols-[200px_1fr] md:gap-0 md:pl-0"
             >
-              <span className="absolute left-0 top-2 h-2 w-2 -translate-x-[3.5px] rounded-full bg-white md:left-[200px]" />
-              <motion.div variants={fadeUp} className="font-mono text-xs uppercase tracking-[0.12em] text-mute md:pr-8 md:pt-1">
+              <span className="absolute left-0 top-2 h-2 w-2 -translate-x-[3.5px] rounded-full bg-ember md:left-[200px]" />
+              <motion.div variants={fadeUp} className="text-sm tabular-nums text-mute md:pr-8 md:pt-1.5">
                 <p className="text-fog">{it.period}</p>
                 <p className="mt-2">{it.location}</p>
               </motion.div>
@@ -87,7 +85,7 @@ export function Work() {
 
                 <ul className="mt-6 space-y-3">
                   {it.highlights.map((h) => (
-                    <motion.li key={h} variants={fadeUp} className="flex gap-3 text-[0.9375rem] leading-7 text-white/75 sm:text-base">
+                    <motion.li key={h} variants={fadeUp} className="flex gap-3 text-[0.9375rem] leading-[1.75] text-white/80 sm:text-base">
                       <span className="mt-3 h-px w-3 shrink-0 bg-white/30" />
                       <span>{h}</span>
                     </motion.li>

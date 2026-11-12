@@ -1,6 +1,7 @@
 import { FaGithub, FaLinkedinIn, FaInstagram } from "react-icons/fa6";
 import { FiArrowUp } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
+import { track } from "../track";
 
 const socials = [
   { name: "GitHub", href: "https://github.com/bulutbirol", icon: FaGithub },
@@ -34,6 +35,7 @@ export default function Footer() {
         <a
           href="/cv.pdf"
           download="Birol-Bulut-CV.pdf"
+          onClick={() => track("cv")}
           className="ml-2 rounded-full border border-white/10 px-4 py-2 text-sm text-fog transition hover:border-white/30 hover:text-white"
         >
           {copy.about.downloadCv}

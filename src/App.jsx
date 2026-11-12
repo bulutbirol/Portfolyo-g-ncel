@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { MotionConfig } from "framer-motion";
 import { Backdrop } from "./components/Backdrop";
 import { Navbar } from "./components/layout/Navbar";
@@ -9,9 +10,12 @@ import Contact from "./sections/Contact";
 import { ToastContainer } from "react-toastify";
 import Footer from "./sections/Footer";
 import { LanguageProvider } from "./LanguageProvider";
+import { track } from "./track";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function App({ initialLanguage = "en" }) {
+  useEffect(() => track("visit"), []);
+
   return (
     <LanguageProvider initialLanguage={initialLanguage}>
       <MotionConfig reducedMotion="never">

@@ -30,7 +30,41 @@
   }
 
   ::selection {
-    @apply bg-white text-ink;
+    @apply bg-ember text-ink;
+  }
+
+  body {
+    caret-color: theme("colors.ember");
+    accent-color: theme("colors.ember");
+    scrollbar-color: #2a2d38 #07080c;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #07080c;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #2a2d38;
+    border-radius: 999px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme("colors.ember");
   }
 
   html {
@@ -39,7 +73,7 @@
 
   a:focus-visible,
   button:focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid theme("colors.ember");
     outline-offset: 3px;
   }
 }
