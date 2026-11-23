@@ -4,6 +4,7 @@ export const translations = {
       home: "Home",
       about: "About",
       projects: "Projects",
+      apps: "Apps",
       work: "Work",
       contact: "Contact",
       language: "Language",
@@ -69,6 +70,17 @@ export const translations = {
         movies: "Browse movie data with a responsive React interface and predictable Redux state.",
         ecommerce: "A full-stack storefront connecting a product interface to a Node.js backend.",
         watchlist: "A focused watchlist experience for keeping track of films to revisit.",
+      },
+    },
+    apps: {
+      heading: "My Apps",
+      description: "Apps I build, publish and maintain on my own, from store review to updates.",
+      openStore: "Open {title} on {store}",
+      kinds: { blobnap: "Puzzle game · iOS", nudgio: "Birthday reminder · iOS", setyra: "PC setup tool · Windows" },
+      descriptions: {
+        blobnap: "A color box puzzle with global and per-country leaderboards. Scores are checked on the server and protected with row-level security.",
+        nudgio: "Birthday and date reminders with local notifications, contact import, gift ideas and message suggestions, in six languages.",
+        setyra: "Sets up a new Windows PC in one place: apps, system settings and services, with a backup before every change.",
       },
     },
     work: {
@@ -145,6 +157,7 @@ export const translations = {
       home: "Ana Sayfa",
       about: "Hakkımda",
       projects: "Projeler",
+      apps: "Uygulamalar",
       work: "Deneyim",
       contact: "İletişim",
       language: "Dil",
@@ -210,6 +223,17 @@ export const translations = {
         movies: "Film verilerini mobil uyumlu bir React arayüzü ve Redux durum yönetimiyle inceleme uygulaması.",
         ecommerce: "Ürün arayüzünü Node.js sunucusuna bağlayan bir e-ticaret uygulaması.",
         watchlist: "İzlenecek filmleri takip etmek için geliştirilmiş sade bir liste uygulaması.",
+      },
+    },
+    apps: {
+      heading: "Uygulamalarım",
+      description: "Mağaza incelemesinden güncellemelere kadar kendim geliştirip yayınladığım uygulamalar.",
+      openStore: "{title} uygulamasını {store}'da aç",
+      kinds: { blobnap: "Bulmaca oyunu · iOS", nudgio: "Doğum günü hatırlatıcı · iOS", setyra: "Bilgisayar kurulum aracı · Windows" },
+      descriptions: {
+        blobnap: "Genel ve ülke bazlı sıralama tablolu bir renk kutusu bulmacası. Skorlar sunucuda kontrol ediliyor ve satır düzeyinde güvenlikle korunuyor.",
+        nudgio: "Yerel bildirimler, rehberden aktarma, hediye fikirleri ve mesaj önerileriyle altı dilde doğum günü ve önemli gün hatırlatıcısı.",
+        setyra: "Yeni bir Windows bilgisayarı tek yerden kurar: uygulamalar, sistem ayarları ve servisler. Her değişiklikten önce yedek alır.",
       },
     },
     work: {

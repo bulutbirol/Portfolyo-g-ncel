@@ -161,3 +161,13 @@ test("contact starts as a step-by-step form", async () => {
   assert.match(html, /Job opportunity/);
   assert.doesNotMatch(html, /birolblood@gmail\.com/);
 });
+
+test("apps section lists the published apps with store links", async () => {
+  const html = await render("/src/sections/Apps.jsx", "Apps", {}, "tr");
+  assert.match(html, /id="apps"/);
+  assert.match(html, /Uygulamalarım/);
+  for (const name of ["Blobnap", "Nudgio", "Setyra"]) assert.match(html, new RegExp(name));
+  assert.match(html, /apps\.apple\.com\/app\/id6835477567/);
+  assert.match(html, /apps\.apple\.com\/app\/id6761790991/);
+  assert.match(html, /apps\.microsoft\.com\/detail\/9NLT1JT7R800/);
+});

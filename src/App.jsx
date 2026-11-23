@@ -5,6 +5,7 @@ import { Navbar } from "./components/layout/Navbar";
 import Hero from "./components/hero/Hero";
 import { About } from "./sections/About";
 import Projects from "./sections/Projects";
+import { Apps } from "./sections/Apps";
 import { Work } from "./sections/Work";
 import Contact from "./sections/Contact";
 import { ToastContainer } from "react-toastify";
@@ -27,6 +28,7 @@ export default function App({ initialLanguage = "en" }) {
             <Hero />
             <About />
             <Projects />
+            <Apps />
             <Work />
             <Contact />
             <Footer />

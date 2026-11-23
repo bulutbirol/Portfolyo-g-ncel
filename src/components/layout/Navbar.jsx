@@ -3,7 +3,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from "framer-motion";
 import { useLanguage } from "../../LanguageContext";
 import { ease } from "../../motion";
 
-const SECTIONS = ["home", "about", "projects", "work", "contact"];
+const SECTIONS = ["home", "about", "projects", "apps", "work", "contact"];
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
