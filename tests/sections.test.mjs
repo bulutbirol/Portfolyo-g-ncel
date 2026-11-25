@@ -103,10 +103,11 @@ test("every project row has its own description and demo link", async () => {
   assert.match(html, /FSM-Platform-Project/);
 });
 
-test("project screenshots stay visible in every row and the ServiceFlow scene renders", async () => {
+test("project screenshots stay visible in every row and the ServiceFlow live demo renders", async () => {
   const html = await render("/src/sections/Projects.jsx", "default", {}, "en");
   assert.match(html, /data-project-scene/);
-  assert.equal((html.match(/src="\/projects\/[a-z]+\.jpg"/g) || []).length, 6);
+  assert.equal((html.match(/src="\/projects\/[a-z]+\.jpg"/g) || []).length, 5);
+  assert.match(html, /<iframe[^>]+src="https:\/\/serviceflow-web-ten\.vercel\.app\/"/);
   assert.doesNotMatch(html, /grid-rows-\[0fr\]/);
 });
 

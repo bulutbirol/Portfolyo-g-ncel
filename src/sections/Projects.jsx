@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { FiArrowUpRight, FiGithub } from "react-icons/fi";
 import { useLanguage } from "../LanguageContext";
@@ -76,7 +76,8 @@ export default function Projects() {
   const sceneRef = useRef(null);
   const { scrollYProgress } = useScroll({ target: sceneRef, offset: ["start end", "center center"] });
   const clip = useTransform(scrollYProgress, [0, 1], ["inset(12% 16% round 32px)", "inset(0% 0% round 24px)"]);
-  const zoom = useTransform(scrollYProgress, [0, 1], [1.12, 1]);
+  // iframe swallows wheel scroll, so it stays inert until the visitor opts in
+  const [demoActive, setDemoActive] = useState(false);
 
   return (
     <Reveal as="section" id="projects" variants={stagger(0.1)} className="relative scroll-mt-28 py-14 md:py-36">
@@ -128,17 +129,24 @@ export default function Projects() {
       </motion.article>
 
       <div ref={sceneRef} data-project-scene className="relative left-1/2 mt-16 w-[min(94vw,1560px)] -translate-x-1/2 md:mt-24">
-        <motion.figure style={{ clipPath: clip }} className="overflow-hidden bg-ink">
-          <motion.img
-            style={{ scale: zoom }}
-            src="/projects/serviceflow.jpg"
-            alt={text.serviceFlowShotAlt}
-            width="1568"
-            height="772"
+        <motion.figure style={{ clipPath: clip }} className="relative overflow-hidden bg-ink">
+          <iframe
+            src="https://serviceflow-web-ten.vercel.app/"
+            title={text.serviceFlowDemoTitle}
             loading="lazy"
-            decoding="async"
-            className="block h-auto w-full"
+            className={`block h-[78vh] max-h-[860px] min-h-[520px] w-full border-0 ${demoActive ? "" : "pointer-events-none"}`}
           />
+          {!demoActive && (
+            <button
+              type="button"
+              onClick={() => setDemoActive(true)}
+              className="absolute inset-0 flex items-end justify-center pb-8"
+            >
+              <span className="rounded-full bg-ink/90 px-5 py-2.5 text-sm font-medium text-white ring-1 ring-white/15 backdrop-blur">
+                {text.serviceFlowDemoHint}
+              </span>
+            </button>
+          )}
         </motion.figure>
       </div>
 
