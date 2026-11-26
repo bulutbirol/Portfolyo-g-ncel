@@ -58,21 +58,16 @@ $entry = ['t' => $now, 'e' => $event] + ($notify ? ['n' => 1] : []);
 file_put_contents($logFile, json_encode($entry) . "
 ", FILE_APPEND | LOCK_EX);
 
-// Reuses the contact form's SMTP settings (api/config.php + api/phpmailer): mail() is not usable on this host.
+// Sends through the host's local mail system via api/phpmailer (config.php only needs to exist).
 if ($notify && !empty($cfg['notify']) && is_file(__DIR__ . '/config.php')) {
     $smtp = require __DIR__ . '/config.php';
     try {
         foreach (['Exception', 'PHPMailer', 'SMTP'] as $f) require_once __DIR__ . "/phpmailer/src/$f.php";
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = (string)$smtp['smtp_host'];
-        $mail->SMTPAuth = true;
-        $mail->Username = (string)$smtp['smtp_user'];
-        $mail->Password = (string)$smtp['smtp_pass'];
-        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = (int)$smtp['smtp_port'];
+        $mail->isMail();
+        $mail->Sender = 'contact@birolbulut.dev';
         $mail->CharSet = 'UTF-8';
-        $mail->setFrom((string)$smtp['smtp_user'], 'birolbulut.dev');
+        $mail->setFrom('contact@birolbulut.dev', 'birolbulut.dev');
         $mail->addAddress($cfg['notify']);
         $mail->Subject = $event === 'cv' ? 'CV indirildi' : 'Siteye yeni ziyaret';
         $mail->Body = date('d.m.Y H:i', $now);
