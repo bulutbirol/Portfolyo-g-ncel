@@ -270,7 +270,7 @@ export const translations = {
       email: "E-posta",
       message: "Mesaj",
       messagePlaceholder: "Projenin kapsamını, hedeflerini ve takvimini anlat...",
-      namePlaceholder: "Ayşe Yılmaz",
+      namePlaceholder: "Birol Bulut",
       emailPlaceholder: "sen@sirket.com",
       send: "Gönder",
       sending: "Gönderiliyor...",

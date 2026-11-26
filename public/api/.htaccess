@@ -1,3 +1,7 @@
-<FilesMatch "^(track\.log|track\.config\.php)$">
+# only the two endpoints are reachable; config, logs, rate files and phpmailer stay private
+<FilesMatch ".*">
   Require all denied
+</FilesMatch>
+<FilesMatch "^(contact|track)\.php$">
+  Require all granted
 </FilesMatch>
