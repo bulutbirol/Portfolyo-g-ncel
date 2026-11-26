@@ -55,16 +55,19 @@ if (is_file($logFile)) {
 }
 
 $entry = ['t' => $now, 'e' => $event] + ($notify ? ['n' => 1] : []);
-file_put_contents($logFile, json_encode($entry) . "
-", FILE_APPEND | LOCK_EX);
+file_put_contents($logFile, json_encode($entry) . "\n", FILE_APPEND | LOCK_EX);
 
-// Sends through the host's local mail system via api/phpmailer (config.php only needs to exist).
+// Sends through the host's local exim via api/phpmailer (config.php only needs to exist).
+// mail() is in disable_functions on novus, so talk SMTP to localhost:25 instead.
 if ($notify && !empty($cfg['notify']) && is_file(__DIR__ . '/config.php')) {
     $smtp = require __DIR__ . '/config.php';
     try {
         foreach (['Exception', 'PHPMailer', 'SMTP'] as $f) require_once __DIR__ . "/phpmailer/src/$f.php";
         $mail = new PHPMailer\PHPMailer\PHPMailer(true);
-        $mail->isMail();
+        $mail->isSMTP();
+        $mail->Host = 'localhost';
+        $mail->Port = 25;
+        $mail->SMTPAutoTLS = false;
         $mail->Sender = 'contact@birolbulut.dev';
         $mail->CharSet = 'UTF-8';
         $mail->setFrom('contact@birolbulut.dev', 'birolbulut.dev');
