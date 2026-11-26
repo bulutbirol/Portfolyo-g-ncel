@@ -24,11 +24,11 @@ test("language pages identify their canonical and alternate URLs", async () => {
   const english = await read("index.html");
   const turkish = await read("tr/index.html");
 
-  assert.match(english, /rel="canonical" href="https:\/\/birolweb\.dev\/"/);
-  assert.match(turkish, /rel="canonical" href="https:\/\/birolweb\.dev\/tr\/"/);
+  assert.match(english, /rel="canonical" href="https:\/\/birolbulut.dev\/"/);
+  assert.match(turkish, /rel="canonical" href="https:\/\/birolbulut.dev\/tr\/"/);
   for (const html of [english, turkish]) {
-    assert.match(html, /hreflang="en" href="https:\/\/birolweb\.dev\/"/);
-    assert.match(html, /hreflang="tr" href="https:\/\/birolweb\.dev\/tr\/"/);
+    assert.match(html, /hreflang="en" href="https:\/\/birolbulut.dev\/"/);
+    assert.match(html, /hreflang="tr" href="https:\/\/birolbulut.dev\/tr\/"/);
     assert.match(html, /type="application\/ld\+json"/);
   }
 });
@@ -37,9 +37,9 @@ test("crawlers can discover both pages", async () => {
   const sitemap = await read("sitemap.xml");
   const robots = await read("robots.txt");
 
-  assert.match(sitemap, /https:\/\/birolweb\.dev\//);
-  assert.match(sitemap, /https:\/\/birolweb\.dev\/tr\//);
-  assert.match(robots, /Sitemap: https:\/\/birolweb\.dev\/sitemap\.xml/);
+  assert.match(sitemap, /https:\/\/birolbulut.dev\//);
+  assert.match(sitemap, /https:\/\/birolbulut.dev\/tr\//);
+  assert.match(robots, /Sitemap: https:\/\/birolbulut.dev\/sitemap\.xml/);
 });
 
 test("CV and share image referenced by the pages exist", async () => {

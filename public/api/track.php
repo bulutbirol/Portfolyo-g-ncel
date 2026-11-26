@@ -72,7 +72,7 @@ if ($notify && !empty($cfg['notify']) && is_file(__DIR__ . '/config.php')) {
         $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = (int)$smtp['smtp_port'];
         $mail->CharSet = 'UTF-8';
-        $mail->setFrom((string)$smtp['smtp_user'], 'birolweb.dev');
+        $mail->setFrom((string)$smtp['smtp_user'], 'birolbulut.dev');
         $mail->addAddress($cfg['notify']);
         $mail->Subject = $event === 'cv' ? 'CV indirildi' : 'Siteye yeni ziyaret';
         $mail->Body = date('d.m.Y H:i', $now);

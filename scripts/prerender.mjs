@@ -11,13 +11,13 @@ const { default: App } = await import(pathToFileURL(resolve(root, ".ssr", "App.j
 
 const pages = {
   en: {
-    url: "https://birolweb.dev/",
+    url: "https://birolbulut.dev/",
     title: "Birol Bulut | Full Stack Developer",
     description: "Birol Bulut is a full stack developer in Bursa, Türkiye. Explore React, Spring Boot and PostgreSQL projects including ServiceFlow and Shortlink.",
     locale: "en_US",
   },
   tr: {
-    url: "https://birolweb.dev/tr/",
+    url: "https://birolbulut.dev/tr/",
     title: "Birol Bulut | Full Stack Geliştirici",
     description: "Birol Bulut, Bursa'da React, Spring Boot ve PostgreSQL ile projeler geliştiren bir full stack geliştirici. ServiceFlow ve Shortlink projelerini inceleyin.",
     locale: "tr_TR",
@@ -39,7 +39,7 @@ for (const [language, page] of Object.entries(pages)) {
         {
           "@type": "Person",
           name: "Birol Bulut",
-          url: "https://birolweb.dev/",
+          url: "https://birolbulut.dev/",
           jobTitle: language === "tr" ? "Full Stack Geliştirici" : "Full Stack Developer",
           homeLocation: { "@type": "Place", name: "Bursa, Türkiye" },
           sameAs: ["https://github.com/bulutbirol", "https://www.linkedin.com/in/birol-bulut/"],
@@ -56,11 +56,11 @@ for (const [language, page] of Object.entries(pages)) {
     <meta property="og:title" content="${escape(page.title)}" />
     <meta property="og:description" content="${escape(page.description)}" />
     <meta property="og:url" content="${page.url}" />
-    <meta property="og:image" content="https://birolweb.dev/social-card.png" />
+    <meta property="og:image" content="https://birolbulut.dev/social-card.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="${escape(page.title)}" />
     <meta name="twitter:description" content="${escape(page.description)}" />
-    <meta name="twitter:image" content="https://birolweb.dev/social-card.png" />
+    <meta name="twitter:image" content="https://birolbulut.dev/social-card.png" />
     <script type="application/ld+json">${JSON.stringify(data).replaceAll("<", "\\u003c")}</script>`;
     const html = template
       .replace('<html lang="en"', `<html lang="${language}"`)

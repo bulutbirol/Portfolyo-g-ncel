@@ -21,7 +21,7 @@ font_dir = Path("C:/Windows/Fonts")
 regular = font_dir / "segoeui.ttf"
 bold = font_dir / "segoeuib.ttf"
 draw = ImageDraw.Draw(background)
-draw.text((119, 110), "birolweb.dev", font=ImageFont.truetype(str(regular), 24), fill="#dbeafe")
+draw.text((119, 110), "birolbulut.dev", font=ImageFont.truetype(str(regular), 24), fill="#dbeafe")
 draw.text((108, 215), "Birol Bulut", font=ImageFont.truetype(str(bold), 78), fill="white")
 draw.text((110, 327), "Full Stack Developer", font=ImageFont.truetype(str(regular), 39), fill="#c7d2fe")
 draw.text((110, 440), "React   ·   Spring Boot   ·   PostgreSQL", font=ImageFont.truetype(str(regular), 27), fill="#b3b7c6")

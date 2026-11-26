@@ -67,7 +67,7 @@ export function Navbar() {
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6 md:h-20 lg:px-10">
         <a href="#home" className="group flex items-center gap-2 font-mono text-sm text-white/80 transition hover:text-white">
           <span className="text-mute transition group-hover:text-white">&lt;/&gt;</span>
-          birolweb.dev
+          birolbulut.dev
         </a>
 
         <div className="flex items-center gap-2 md:gap-8">

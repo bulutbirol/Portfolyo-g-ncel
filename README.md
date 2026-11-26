@@ -1,4 +1,4 @@
-# birolweb.dev
+# birolbulut.dev
 
 Birol Bulut's portfolio, built with React, Vite, and Tailwind CSS. ServiceFlow is the featured project.
 
@@ -15,7 +15,7 @@ Run `npm run lint` and `npm run build` before publishing. Vite writes the static
 
 ## Publish through cPanel or FTP
 
-1. In the hosting panel, identify the **document root for `birolweb.dev`** and back up its current contents.
+1. In the hosting panel, identify the **document root for `birolbulut.dev`** and back up its current contents.
 2. Upload the **contents of `dist/`** into that document root, so `index.html` and `assets/` are at its top level.
 3. The CV ships with the build: `public/cv.pdf` is copied to `dist/cv.pdf`. To update it, replace `public/cv.pdf` and rebuild. Keep the existing `api/contact.php` on the server.
 4. Check the home page, the ServiceFlow demo and source links, `/cv.pdf`, and the contact form on the live domain. The contact form submits to `/api/contact.php` and needs the existing PHP endpoint on the hosting server.
